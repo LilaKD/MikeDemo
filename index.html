@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tandm Demo Companion, Mike's Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0a1830;
+  --navy-2: #122446;
+  --ink: #0e1a30;
+  --paper: #f5f3ee;
+  --paper-2: #ebe7df;
+  --blue: #0668ff;
+  --blue-soft: #e8f0ff;
+  --gold: #d9a648;
+  --rust: #c8552a;
+  --green: #2f7d4f;
+  --line: #d8d3c8;
+  --muted: #6b7384;
+  --shadow: 0 1px 0 rgba(10,24,48,.04), 0 8px 24px -8px rgba(10,24,48,.08);
+
+  --serif: 'IBM Plex Sans', system-ui, sans-serif;
+  --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+/* ---------- LAYOUT ---------- */
+
+/* ---------- TOP BAR ---------- */
+.topbar {
+  background: var(--navy);
+  color: var(--paper);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border-bottom: 1px solid var(--navy-2);
+}
+.topbar .brand {
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.topbar .brand-mark {
+  display: inline-block;
+  width: 10px; height: 10px;
+  background: var(--blue);
+  border-radius: 2px;
+  transform: translateY(1px);
+}
+.topbar .brand-sub {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(245,243,238,0.6);
+}
+
+.topbar .session {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 16px;
+  font-size: 13px;
+  color: rgba(245,243,238,0.8);
+}
+.session .label {
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: rgba(245,243,238,0.5);
+}
+.session input {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--paper);
+  padding: 5px 10px;
+  font-family: var(--sans);
+  font-size: 13px;
+  border-radius: 4px;
+  width: 180px;
+}
+.session input:focus { outline: 1px solid var(--blue); border-color: var(--blue); }
+
+.spacer { flex: 1; }
+
+.proptype {
+  display: flex;
+  background: rgba(255,255,255,0.06);
+  border-radius: 5px;
+  padding: 3px;
+  gap: 2px;
+}
+.proptype button {
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  color: rgba(245,243,238,0.6);
+  transition: all 0.15s;
+}
+.proptype button.active {
+  background: var(--blue);
+  color: white;
+}
+
+.topbar-actions {
+  display: flex;
+  gap: 8px;
+}
+.topbar-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  color: var(--paper);
+  transition: all 0.15s;
+}
+.topbar-actions button:hover {
+  background: rgba(255,255,255,0.12);
+}
+.topbar-actions button .ico {
+  width: 14px; height: 14px;
+  opacity: 0.7;
+}
+
+/* ---------- MAIN GRID ---------- */
+.main {
+  display: grid;
+  grid-template-columns: 260px 1fr 360px;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.shell {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ---------- LEFT NAV ---------- */
+.nav {
+  background: var(--paper-2);
+  border-right: 1px solid var(--line);
+  padding: 22px 0 60px;
+  overflow-y: auto;
+  height: 100%;
+}
+.nav-section-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0 24px 8px;
+  margin-top: 18px;
+}
+.nav-section-title:first-of-type { margin-top: 0; }
+
+.nav ol {
+  list-style: none;
+}
+.nav-item {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 9px 24px 9px 22px;
+  border-left: 2px solid transparent;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.nav-item:hover {
+  background: rgba(6,104,255,0.05);
+}
+.nav-item.active {
+  border-left-color: var(--blue);
+  background: rgba(6,104,255,0.08);
+  font-weight: 500;
+}
+.nav-item .num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  min-width: 18px;
+}
+.nav-item.active .num {
+  color: var(--blue);
+}
+.nav-item .lbl {
+  line-height: 1.3;
+}
+
+/* ---------- CENTRE PANEL ---------- */
+.panel {
+  padding: 36px 44px 80px;
+  overflow-y: auto;
+  background: var(--paper);
+  height: 100%;
+}
+.phase {
+  display: none;
+  max-width: 720px;
+}
+.phase.active { display: block; }
+
+.phase-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.phase-eyebrow .step {
+  background: var(--blue);
+  color: white;
+  padding: 3px 7px;
+  border-radius: 3px;
+  letter-spacing: 0.08em;
+}
+
+.phase-title {
+  font-family: var(--sans);
+  font-size: 34px;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+.phase-summary {
+  font-size: 17px;
+  color: var(--muted);
+  margin-bottom: 28px;
+  line-height: 1.5;
+  max-width: 600px;
+}
+
+.block {
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 6px;
+  margin-bottom: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.block-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+.block-head .tag {
+  width: 22px; height: 22px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--mono);
+}
+.block.tell .tag { background: var(--blue); color: white; }
+.block.show .tag { background: var(--ink); color: white; }
+.block.ask .tag { background: var(--gold); color: var(--ink); }
+.block.reinforce .tag { background: var(--rust); color: white; }
+.block-body {
+  padding: 18px 20px 20px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.block-body p + p { margin-top: 10px; }
+.block-body ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.block-body ul li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 9px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.block-body ul li:last-child { margin-bottom: 0; }
+.block-body ul li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+.block.reinforce .block-body ul li::before { background: var(--rust); }
+.block.ask .block-body ul li::before { background: var(--gold); }
+.block.show .block-body ul li::before { background: var(--ink); }
+
+.block-body ul ul {
+  margin-top: 6px;
+  margin-bottom: 4px;
+}
+.block-body ul ul li {
+  font-size: 15px;
+  color: #3b4555;
+}
+.block-body ul ul li::before {
+  background: var(--muted);
+  width: 4px;
+  height: 4px;
+  top: 10px;
+}
+
+.block-body .quote {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--ink);
+  border-left: 3px solid var(--blue);
+  padding: 4px 0 4px 14px;
+  margin: 10px 0;
+}
+.block.reinforce .block-body { background: linear-gradient(180deg, rgba(200,85,42,0.04), white); }
+
+/* prospect-type variants */
+[data-prospect="consultancy"] .show-contractor,
+[data-prospect="consultancy"] .show-solo { display: none; }
+[data-prospect="consultancy"] .show-consultancy { display: block; }
+
+[data-prospect="contractor"] .show-consultancy,
+[data-prospect="contractor"] .show-solo { display: none; }
+[data-prospect="contractor"] .show-contractor { display: block; }
+
+[data-prospect="solo"] .show-consultancy,
+[data-prospect="solo"] .show-contractor { display: none; }
+[data-prospect="solo"] .show-solo { display: block; }
+
+/* List items keep flex display when shown via parent */
+[data-prospect="consultancy"] li.show-consultancy,
+[data-prospect="contractor"] li.show-contractor,
+[data-prospect="solo"] li.show-solo { display: list-item; }
+
+.variant-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--rust);
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+/* ---------- RIGHT SIDEBAR ---------- */
+.aside {
+  background: white;
+  border-left: 1px solid var(--line);
+  padding: 28px 24px 60px;
+  overflow-y: auto;
+  height: 100%;
+}
+.aside-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.qa {
+  border-bottom: 1px dashed var(--line);
+  padding: 12px 0;
+}
+.qa:last-child { border-bottom: none; }
+.qa-q {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 7px;
+  line-height: 1.35;
+}
+.qa-q::before {
+  content: "Q. ";
+  color: var(--blue);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 0.08em;
+}
+.qa-a {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: #2a3548;
+}
+
+/* ---------- BOTTOM BAR ---------- */
+.bottombar {
+  background: var(--navy);
+  color: var(--paper);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 12px;
+  border-top: 1px solid var(--navy-2);
+}
+.bottombar .group {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.bottombar .group-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(245,243,238,0.5);
+}
+.pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 4px 9px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 3px;
+  font-size: 12px;
+}
+.pill strong {
+  font-weight: 600;
+  color: var(--gold);
+}
+.bottombar-nav {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+}
+.bottombar-nav button {
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--blue);
+  border-radius: 4px;
+  color: white;
+}
+.bottombar-nav button.secondary {
+  background: rgba(255,255,255,0.08);
+}
+.bottombar-nav button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ---------- INLINE BITS ---------- */
+.callout {
+  background: var(--blue-soft);
+  border-left: 3px solid var(--blue);
+  padding: 10px 14px;
+  margin: 10px 0;
+  font-size: 13.5px;
+  border-radius: 0 4px 4px 0;
+}
+.callout strong { color: var(--blue); font-weight: 600; }
+
+.kbd {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+.script {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.script em {
+  font-style: italic;
+  color: var(--muted);
+}
+
+.placeholder {
+  display: inline-block;
+  padding: 2px 8px;
+  background: rgba(217, 166, 72, 0.18);
+  color: #735311;
+  border-radius: 3px;
+  font-size: 12.5px;
+  font-family: var(--mono);
+  font-style: normal;
+}
+
+/* helper for "needs content" markers in skeleton */
+.skel {
+  border: 1px dashed var(--line);
+  background: #fafaf6;
+  padding: 14px;
+  border-radius: 4px;
+  color: var(--muted);
+  font-style: italic;
+  font-size: 13.5px;
+}
+
+.legend-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+.legend-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-size: 12.5px;
+}
+.dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot-blue { background: #0668ff; }
+.dot-light-green { background: #9fd99f; }
+.dot-dark-green { background: #2f7d4f; }
+.dot-orange { background: #ef8a32; }
+.dot-red { background: #d04444; }
+.dot-orange-wall { background: transparent; border: 2px solid #ef8a32; border-radius: 0; width: 14px; height: 4px; }
+
+.scroll-hint {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+/* mode badge */
+.mode-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-left: 8px;
+}
+
+@media (max-width: 1280px) {
+  .main { grid-template-columns: 230px 1fr 300px; }
+}
+@media (max-width: 1080px) {
+  .main { grid-template-columns: 200px 1fr; }
+  .aside { display: none; }
+}
+
+</style>
+</head>
+<body>
+<div class="shell" data-prospect="consultancy">
+
+  <!-- ============ TOP BAR ============ -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark"></span>
+      Tandm
+      <span class="brand-sub">Demo Companion</span>
+    </div>
+
+    <div class="session">
+      <span class="label">Prospect</span>
+      <input type="text" id="prospectName" placeholder="e.g. Bayside Fire Services" value="">
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="proptype" role="tablist" aria-label="Prospect type">
+      <button class="active" data-type="consultancy">Consultancy</button>
+      <button data-type="contractor">Contractor</button>
+      <button data-type="solo">Solo / Hybrid</button>
+    </div>
+
+    <div class="topbar-actions">
+      <button title="Open ROI Estimator from the alignment session">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
+        ROI from Alignment
+      </button>
+      <button title="Cheat sheet: limitations + honesty stack">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Limitations
+      </button>
+      <button title="Current offer + pricing reference">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 110-4h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 100 4h4v-4z"/></svg>
+        Offer
+      </button>
+    </div>
+  </header>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <!-- ===== LEFT NAV ===== -->
+    <nav class="nav" aria-label="Demo phases">
+      <div class="nav-section-title">Open</div>
+      <ol>
+        <li class="nav-item active" data-phase="1"><span class="num">01</span><span class="lbl">Welcome &amp; Recap</span></li>
+        <li class="nav-item" data-phase="2"><span class="num">02</span><span class="lbl">Set the Scene</span></li>
+      </ol>
+
+      <div class="nav-section-title">Setup</div>
+      <ol start="3">
+        <li class="nav-item" data-phase="3"><span class="num">03</span><span class="lbl">Settings Tour</span></li>
+        <li class="nav-item" data-phase="4"><span class="num">04</span><span class="lbl">Room Creation</span></li>
+      </ol>
+
+      <div class="nav-section-title">The Magic</div>
+      <ol start="5">
+        <li class="nav-item" data-phase="5"><span class="num">05</span><span class="lbl">First Layout &amp; Colour Code</span></li>
+        <li class="nav-item" data-phase="6"><span class="num">06</span><span class="lbl">Grid Edit &amp; Free Edit</span></li>
+        <li class="nav-item" data-phase="7"><span class="num">07</span><span class="lbl">Splitting &amp; Complex Rooms</span></li>
+        <li class="nav-item" data-phase="8"><span class="num">08</span><span class="lbl">Orange Walls</span></li>
+        <li class="nav-item" data-phase="9"><span class="num">09</span><span class="lbl">Hazard Classifications</span></li>
+      </ol>
+
+      <div class="nav-section-title">Dry Fire</div>
+      <ol start="10">
+        <li class="nav-item" data-phase="10"><span class="num">10</span><span class="lbl">Detectors &amp; Speakers</span></li>
+      </ol>
+
+      <div class="nav-section-title">Wrap</div>
+      <ol start="11">
+        <li class="nav-item" data-phase="11"><span class="num">11</span><span class="lbl">Push to Revit</span></li>
+        <li class="nav-item" data-phase="12"><span class="num">12</span><span class="lbl">Redesign Workflow</span></li>
+        <li class="nav-item" data-phase="13"><span class="num">13</span><span class="lbl">Limitations</span></li>
+        <li class="nav-item" data-phase="14"><span class="num">14</span><span class="lbl">ROI &amp; Close</span></li>
+      </ol>
+    </nav>
+
+    <!-- ===== CENTRE PANEL ===== -->
+    <section class="panel" id="panel">
+
+      <!-- ============================================== -->
+      <!-- PHASE 1, Welcome & Recap                       -->
+      <!-- ============================================== -->
+      <article class="phase active" data-phase="1">
+        <div class="phase-eyebrow"><span class="step">01</span> Open <span class="mode-badge">~3 min</span></div>
+        <h1 class="phase-title">Welcome &amp; Recap</h1>
+        <p class="phase-summary">Open warmly, recap the alignment session, set expectations, and confirm who's in the room.</p>
+
+        <div class="block tell">
+          <div class="block-head"><span class="tag">T</span>Tell</div>
+          <div class="block-body">
+            <ul>
+              <li>Thanks so much for jumping on, I really appreciate the time, especially given how busy you all are.</li>
+              <li>Just a quick recap from our alignment session a couple of weeks back. You've got <span class="placeholder">[X designers]</span>, your portfolio leans <span class="placeholder">[mix]</span>, and you're running about <span class="placeholder">[Y%]</span> Revit.</li>
+              <li>I'm Mike, Head of Customer Success at Tandm.</li>
+              <li>Upfront, I'm not a fire designer. I came in with no Revit or fire background and got comfortable with Tandm in about a week, which says something about how the tool's been built.</li>
+              <li>Anything technical I can't answer, I'll note down and come straight back to you, or loop in Byron, our product expert who built this.</li>
+              <li>Today's plan is about thirty minutes walking through the platform. The more you ask, the more you'll get out of it, so please jump in any time.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block show">
+          <div class="block-head"><span class="tag">S</span>Show</div>
+          <div class="block-body">
+            <ul>
+              <li>I'll have the Tandm Hospital model open in Revit, ready to share.</li>
+              <li>I'll confirm the screen share is visible before I start the demo proper.</li>
+              <li>I'll mute notifications and close anything sensitive in other tabs.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block ask">
+          <div class="block-head"><span class="tag">?</span>Ask</div>
+          <div class="block-body">
+            <ul>
+              <li>Could each of you quickly introduce yourselves, names and roles?</li>
+              <li><strong>My calibration question to set the depth of today's demo:</strong>
+                <ul>
+                  <li class="show-consultancy">Where in the design lifecycle do you typically come in? Designing from scratch, or working off architects' or upstream models?</li>
+                  <li class="show-contractor">Are you typically taking layouts from consultants and adapting, or doing the design yourselves from scratch?</li>
+                  <li class="show-solo">How much of your work is fresh greenfield design versus adapting existing layouts?</li>
+                </ul>
+              </li>
+              <li>If they last saw Tandm a while ago, I'll ask when and use it to calibrate. "The product has moved on significantly in twelve months."</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block reinforce">
+          <div class="block-head"><span class="tag">R</span>Reinforce</div>
+          <div class="block-body">
+            <div class="show-consultancy">
+              <span class="variant-label">For consultancies</span>
+              <ul>
+                <li>We've focused the last twelve months on making Tandm a real design tool for fire designers, not just a layout plotter.</li>
+                <li>You'll see that in the level of control you have. Tandm does the heavy lifting, your designers stay in charge of the design.</li>
+              </ul>
+            </div>
+            <div class="show-contractor">
+              <span class="variant-label">For contractors</span>
+              <ul>
+                <li>We've focused the last twelve months on making Tandm a real design tool, not just a layout plotter.</li>
+                <li>It's been useful for D&amp;C tendering, getting compliant layouts out fast, but it's also a serious design and coordination tool.</li>
+              </ul>
+            </div>
+            <div class="show-solo">
+              <span class="variant-label">For solo / hybrid</span>
+              <ul>
+                <li>We've focused the last twelve months on making Tandm work for designers across the spectrum, from solo subbies through to multi-disciplinary firms.</li>
+                <li>It's not going to replace your judgement, it just compresses the boring parts.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="scroll-hint">Next: Set the scene with the Tandm Hospital model</div>
+      </article>
+
+      <!-- ============================================== -->
+      <!-- PHASE 2, Set the Scene                         -->
+      <!-- ============================================== -->
+      <article class="phase" data-phase="2">
+        <div class="phase-eyebrow"><span class="step">02</span> Open <span class="mode-badge">~2 min</span></div>
+        <h1 class="phase-title">Set the Scene</h1>
+        <p class="phase-summary">Introduce the Tandm Hospital, flag the native Revit prerequisite, and anchor the time question that frames the whole demo.</p>
+
+        <div class="block tell">
+          <div class="block-head"><span class="tag">T</span>Tell</div>
+          <div class="block-body">
+            <ul>
+              <li>In front of you is what we call the Tandm Hospital. <strong>441 rooms, just over 9,000 square metres.</strong></li>
+              <li>I'm going to place close to <strong>1,000 sprinkler heads</strong>, below-ceiling and exposed.</li>
+              <li>One thing I want to flag early. <strong>Tandm is a Revit add-in and needs a native Revit model to run properly.</strong></li>
+              <li>It reads Revit rooms to understand the geometry and place sprinklers. If the model's been converted from another format or has mapping issues, that's where things break down, so model quality matters.</li>
+              <li>What I'm showing you today is where Tandm is right now. It's evolving fast, with new versions coming through regularly.</li>
+              <li>Automation handles the bulk of the work, but designers stay in control of the design.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block show">
+          <div class="block-head"><span class="tag">S</span>Show</div>
+          <div class="block-body">
+            <ul>
+              <li>I'll have the Tandm Hospital model open in Revit on the ground floor view.</li>
+              <li>I'll zoom in briefly so they can see the scale and complexity, the rooms, corridors and services in linked models.</li>
+              <li>I won't run anything yet. I just want to orient them to the canvas.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block ask">
+          <div class="block-head"><span class="tag">?</span>Ask</div>
+          <div class="block-body">
+            <ul>
+              <li><strong>My anchor question.</strong> Just to gauge things, how long would it take you to place those 1,000 sprinklers on a floor plate this size, manually?</li>
+              <li>I'm expecting 2 to 5 days. Whatever they say, I'll lock it in.</li>
+              <li>I'll write the number down on a sticky note. I'll come back to it at the close.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block reinforce">
+          <div class="block-head"><span class="tag">R</span>Reinforce</div>
+          <div class="block-body">
+            <ul>
+              <li>Great, hold that number in your head.</li>
+              <li>By the end of this demo, you'll see Tandm do this in under an hour, with a designer cleaning up at the end.</li>
+              <li class="show-contractor">That time saving lands straight on tender turnaround and redesign margin.</li>
+              <li class="show-consultancy">That time goes straight back to higher-value design work, or more projects through the door.</li>
+              <li class="show-solo">For a solo operator, that's the difference between taking on a new job or turning it down.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scroll-hint">Next: I'll walk through the settings before running anything</div>
+      </article>
+
+      <!-- ============================================== -->
+      <!-- PHASE 3, Settings Tour                         -->
+      <!-- ============================================== -->
+      <article class="phase" data-phase="3">
+        <div class="phase-eyebrow"><span class="step">03</span> Setup <span class="mode-badge">~4 min</span></div>
+        <h1 class="phase-title">Settings Tour</h1>
+        <p class="phase-summary">Standards, tile positions, soffit offsets, families, custom spacings. Set up once per project.</p>
+
+        <div class="block tell">
+          <div class="block-head"><span class="tag">T</span>Tell</div>
+          <div class="block-body">
+            <ul>
+              <li>Before I run Tandm, there are a few settings to set up. You only do this once per project.</li>
+              <li><strong>Standards.</strong> Tandm ships with AS 2118, NFPA 13, and British Standards. You can work in metric or imperial.</li>
+              <li><strong>Tile positions.</strong> You can tell Tandm which positions on a tile are valid for placement. Most of the time, I'd leave everything on. If you physically can't place in the corners of a square tile, you deactivate those positions.</li>
+              <li><strong>Custom tile sizes.</strong> If the architect uses a non-standard tile size, you add it here so Tandm can match it.</li>
+              <li><strong>Soffit offset for exposed areas.</strong> This sets how far off the soffit your sprinklers sit. We've defaulted to the standard maximum, 300mm for combustible, 450mm for non-combustible. You can adjust if you want to lift them to align with your range pipework.</li>
+              <li><strong>Sprinkler families.</strong> We ship with Tandm families and some Victaulic families because of our partnership. I always recommend you use your own families. Load them into Revit like normal, and as long as they're unhosted, they appear in this list.</li>
+              <li><strong>Custom hazard classifications.</strong> Need different spacings for extended coverage, residential, flush, semi-recessed? Create a new class based on an existing one, edit any field. You can map different families to different classes.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block show">
+          <div class="block-head"><span class="tag">S</span>Show</div>
+          <div class="block-body">
+            <ul>
+              <li>I'll click into Settings.</li>
+              <li>Quick walk through each tab. Standards, then Tile positions, then Sprinkler placement, Families, Design standards.</li>
+              <li>I'll create a custom hazard class as a demo. "Test light" based on light hazard, change one value, hit Apply. I'll show it now appears in the families list ready to map.</li>
+              <li>I'll click into Smoke Detectors briefly. "Same pattern. We'll come back to this when we layer detectors on."</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block ask">
+          <div class="block-head"><span class="tag">?</span>Ask</div>
+          <div class="block-body">
+            <ul>
+              <li>Are you mostly working to AS 2118, or do you also do projects under NFPA or British standards?</li>
+              <li>Do you have your own sprinkler families you'd want to load in, or are you happy to start with what we ship?</li>
+              <li class="show-contractor">Do you tend to use flush heads in certain areas? We can set up a flush classification just for those rooms.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block reinforce">
+          <div class="block-head"><span class="tag">R</span>Reinforce</div>
+          <div class="block-body">
+            <ul>
+              <li>Set this up once, and every project after that is built around <strong>your firm's standards</strong>. Your families, your annotation, your spacings.</li>
+              <li>This is what we mean by Tandm being a real design tool. You don't bend to the software, the software bends to you.</li>
+              <li class="show-contractor">For D&amp;C work, this means every tender response is consistent with how your designers actually deliver.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scroll-hint">Next: Create the Revit rooms Tandm needs to run</div>
+      </article>
+
+      <!-- ============================================== -->
+      <!-- PHASE 4, Room Creation                         -->
+      <!-- ============================================== -->
+      <article class="phase" data-phase="4">
+        <div class="phase-eyebrow"><span class="step">04</span> Setup <span class="mode-badge">~3 min</span></div>
+        <h1 class="phase-title">Room Creation</h1>
+        <p class="phase-summary">The 80/80 framing. Select architectural links, nominate the soffit of the level above, gauge model quality.</p>
+
+        <div class="block tell">
+          <div class="block-head"><span class="tag">T</span>Tell</div>
+          <div class="block-body">
+            <ul>
+              <li>Tandm doesn't depend on the architect having rooms set up. <strong>It creates its own Revit rooms in your fire model</strong> using a built-in tool.</li>
+              <li>All you need is to make sure room bounding is turned on for the architectural link. That's one checkbox.</li>
+              <li>In this dialog you select the architectural links, then nominate the <strong>soffit of the level above</strong>. That gives Tandm the range, from current floor up to that soffit, to look for ceilings and place sprinklers.</li>
+              <li>Tandm tells you the distance between floors so you know you've selected the right level. If it shows 100mm or 1m, you've picked a mezzanine by mistake.</li>
+              <li>I'll hit OK and Tandm creates the rooms.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block show">
+          <div class="block-head"><span class="tag">S</span>Show</div>
+          <div class="block-body">
+            <ul>
+              <li>I'll click Room Creation in the Tandm ribbon.</li>
+              <li>I'll select the architectural links, choose the soffit of level 1, and point out the 4.5m check on the right.</li>
+              <li>I'll hit OK and we'll watch the rooms appear highlighted.</li>
+              <li>This is the first model-quality gauge. If rooms are missing or blank, the architect's model has gaps in those areas.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block ask">
+          <div class="block-head"><span class="tag">?</span>Ask</div>
+          <div class="block-body">
+            <ul>
+              <li>Does your team currently rely on architects' rooms, or do you build your own?</li>
+              <li>How clean are the architectural models you usually get to work with?</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block reinforce">
+          <div class="block-head"><span class="tag">R</span>Reinforce</div>
+          <div class="block-body">
+            <ul>
+              <li>This is the moment you gauge how good the architect's model is.</li>
+              <li><strong>Tandm aims for 80% automation across 80% of rooms.</strong> Perfect models don't exist, every architect's model has imperfections.</li>
+              <li>The 20% Tandm can't process, you finish manually, the same way you would today, just on a much smaller patch.</li>
+              <li>This honesty is intentional. We'd rather you trust what Tandm does brilliantly than oversell it.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scroll-hint">Next: Run the engine and see the magic happen</div>
+      </article>
+
+      <!-- ============================================== -->
+      <!-- PHASE 5, First Layout & Colour Code            -->
+      <!-- ============================================== -->
+      <article class="phase" data-phase="5">
+        <div class="phase-eyebrow"><span class="step">05</span> The Magic <span class="mode-badge">~5 min</span></div>
+        <h1 class="phase-title">First Layout &amp; Colour Code</h1>
+        <p class="phase-summary">Run the engine. Watch the layout appear. Explain the colour code so it lands.</p>
+
+        <div class="block tell">
+          <div class="block-head"><span class="tag">T</span>Tell</div>
+          <div class="block-body">
+            <ul>
+              <li>Now I'm hitting Place Sprinklers.</li>
+              <li>Tandm's engine places <strong>rows and columns</strong> of sprinklers across each room, equally spaced apart, equally away from walls.</li>
+              <li>It also <strong>avoids obstructions</strong> it finds in linked models, like mech, lighting and electrical.</li>
+              <li>And it tries to hit the <strong>tile positions</strong> we set up, balancing all the compliance requirements at once.</li>
+              <li>You can run Tandm across a whole floor, or just on a room or a group of rooms. For typical apartments or typical rooms, I'd run it on one and copy across. <strong>Don't change the way you design.</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block show">
+          <div class="block-head"><span class="tag">S</span>Show</div>
+          <div class="block-body">
+            <ul>
+              <li>I'll hit Place Sprinklers across the whole floor.</li>
+              <li>I'll wait for the layout to appear, around 10 to 60 seconds depending on model size.</li>
+              <li>I'll walk them through the colour code:</li>
+            </ul>
+            <div class="legend-row">
+              <span class="legend-chip"><span class="dot dot-blue"></span> Valid sprinkler, compliant position</span>
+              <span class="legend-chip"><span class="dot dot-light-green"></span> Coverage from that sprinkler</span>
+              <span class="legend-chip"><span class="dot dot-dark-green"></span> Coverage overlap between sprinklers</span>
+              <span class="legend-chip"><span class="dot dot-orange"></span> Invalid, needs attention</span>
+              <span class="legend-chip"><span class="dot dot-red"></span> Out of rule</span>
+              <span class="legend-chip"><span class="dot-orange-wall"></span> Orange wall, flag for designer</span>
+            </div>
+            <ul>
+              <li>I'll click an orange sprinkler, and the left panel shows why it's flagged. Obstruction, no valid ceiling position, etc.</li>
+              <li>I'll click a room, the purple outline shows it's selected.</li>
+              <li>I can click any element to identify it. A light, air register, etc. Right-click cycles through overlapping elements.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block ask">
+          <div class="block-head"><span class="tag">?</span>Ask</div>
+          <div class="block-body">
+            <ul>
+              <li>What's your reaction to that initial pass?</li>
+              <li>Are there areas where you'd want it tighter or looser than what Tandm's given you?</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block reinforce">
+          <div class="block-head"><span class="tag">R</span>Reinforce</div>
+          <div class="block-body">
+            <ul>
+              <li><strong>I'll say this out loud as the layout appears:</strong></li>
+              <li>What just happened in 30 seconds is what would normally take your team a couple of hours of placing, checking, recalculating.</li>
+              <li>That's the 80% automation. Now we look at the rooms Tandm has flagged. That's where you finalise the design.</li>
+              <li>Tandm only adds sprinklers when it can't hit all the compliance requirements with fewer. So most of the time, the layout you're seeing is close to what your designer would have placed manually.</li>
+              <li class="show-contractor">This is where <strong>tender response time</strong> shifts. You can have a coordinated layout to discuss with the architect on day one, not day five.</li>
+              <li class="show-consultancy">This is where <strong>your designers get back to designing</strong> rather than plotting.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scroll-hint">Next: The tools to fix the rooms Tandm flagged</div>
+      </article>
+
+      <!-- ============================================== -->
+      <!-- PHASE 6, Grid Edit & Free Edit                 -->
+      <!-- ============================================== -->
+      <article class="phase" data-phase="6">
+        <div class="phase-eyebrow"><span class="step">06</span> The Magic <span class="mode-badge">~5 min</span></div>
+        <h1 class="phase-title">Grid Edit &amp; Free Edit</h1>
+        <p class="phase-summary">Manipulate any layout in seconds. Live measurements and compliance checks built in.</p>
+
+        <div class="block tell">
+          <div class="block-head"><span class="tag">T</span>Tell</div>
+          <div class="block-body">
+            <ul>
+              <li>When Tandm flags an orange sprinkler, here's what you do.</li>
+              <li><strong>Grid Edit.</strong> I click the room, hit Grid Edit. It resets the room to the minimum number of sprinklers, centrally located. You can drag any sprinkler with full live measurements.</li>
+              <li><strong>Free Edit.</strong> Same room, hit Free Edit. Now you can drag freely, add a sprinkler with left-click, delete with right-click. Snaps to lights automatically.</li>
+              <li><strong>Align to lights.</strong> There's a dedicated Align to Lights button, it finds the closest lights in the room and snaps the sprinkler row to them.</li>
+              <li><strong>Compliance is live:</strong>
+                <ul>
+                  <li>Too far from a wall → red line</li>
+                  <li>Exceeding maximum coverage → red</li>
+                  <li>Too close to another sprinkler → orange</li>
+                  <li>Placed over an obstruction → orange</li>
+                </ul>
+              </li>
+              <li><strong>Shadowing.</strong> Anything over 1.4 square metres of shadow is flagged. Tandm will add a sprinkler over a certain size. If you don't want any shadowing, just drag a sprinkler to cover it.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block show">
+          <div class="block-head"><span class="tag">S</span>Show</div>
+          <div class="block-body">
+            <ul>
+              <li>I'll find a room with an orange sprinkler. Click it. I'll show the left panel reason.</li>
+              <li>I click the room. Hit <span class="kbd">Grid Edit</span>.</li>
+              <li>I drag a sprinkler, show the live measurements appearing.</li>
+              <li>I'll drag one too close to another, watch them turn orange.</li>
+              <li>I'll drag one too far from a wall, watch the line turn red.</li>
+              <li>I'll click the black dots, those are valid tile positions Tandm found.</li>
+              <li>I'll hit <span class="kbd">Align to Lights</span>, sprinklers snap purple to align with lights.</li>
+              <li>I'll try <span class="kbd">Free Edit</span>, show free drag, add and delete.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block ask">
+          <div class="block-head"><span class="tag">?</span>Ask</div>
+          <div class="block-body">
+            <ul>
+              <li>Does your team have a strong preference for aligning sprinklers to lights, or do you tend to design coverage-first?</li>
+              <li>How important is shadowing avoidance in your projects?</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block reinforce">
+          <div class="block-head"><span class="tag">R</span>Reinforce</div>
+          <div class="block-body">
+            <ul>
+              <li>This is where you go from <strong>days to hours</strong>.</li>
+              <li>You're not pulling out a calculator or memorising spacings, Tandm is doing it for you, in real time.</li>
+              <li>Your engineering judgement, but a completely different speed.</li>
+              <li class="show-contractor">When your designers' time is the constraint on how many jobs you can take, this directly increases your capacity.</li>
+              <li class="show-consultancy">For a consultancy, this is where senior designers stop doing junior work and start mentoring or focusing on coordination.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scroll-hint">Next: Splitting complex rooms into shapes Tandm handles well</div>
+      </article>
+
+      <!-- ============================================== -->
+      <!-- PHASE 7, Splitting & Complex Rooms             -->
+      <!-- ============================================== -->
+      <article class="phase" data-phase="7">
+        <div class="phase-eyebrow"><span class="step">07</span> The Magic <span class="mode-badge">~5 min</span></div>
+        <h1 class="phase-title">Splitting &amp; Complex Rooms</h1>
+        <p class="phase-summary">Tandm places one big grid across each room. For corridors, L-shapes and rotated rooms, split into rectangles. Probably the most-used tool.</p>
+
+        <div class="block tell">
+          <div class="block-head"><span class="tag">T</span>Tell</div>
+          <div class="block-body">
+            <ul>
+              <li>Tandm's engine works <strong>best in rectangles</strong>. For complex rooms, corridors, L-shapes, anything non-rectangular, you split them into rectangular zones.</li>
+              <li>Think of it as how you'd already break a room down in your head as a designer. Tandm just makes that explicit.</li>
+              <li>The splitting tool is probably the tool you'll use the most.</li>
+              <li>You can also use splits to <strong>force alignment</strong> across zones, re-split to centre a sprinkler row exactly where you want it.</li>
+              <li>For rotated or angled rooms, Tandm always orients the grid to the <strong>longest wall</strong>. So rotation doesn't matter.</li>
+              <li>For odd-shaped rooms, create the biggest rectangle you can, then use Free Edit to fill in the rest.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block show">
+          <div class="block-head"><span class="tag">S</span>Show</div>
+          <div class="block-body">
+            <ul>
+              <li>I'll find a complex room, corridor with offshoots, L-shaped, or similar.</li>
+              <li>I'll show how Tandm's first pass placed one big grid that doesn't quite work.</li>
+              <li>I'll hit <span class="kbd">Split</span>, hold Shift for orthogonal snapping. Draw split lines to break into rectangles.</li>
+              <li>We watch the layout regenerate cleanly.</li>
+              <li>I'll demonstrate alignment: re-split to centre a sprinkler row.</li>
+              <li>I'll pick a small room. Split it on a diagonal. Hit Grid Edit, show the grid orients to the longest wall.</li>
+              <li>I'll demonstrate the virtual-boundary check: drag a sprinkler too close to one across a split, watch it turn orange.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block ask">
+          <div class="block-head"><span class="tag">?</span>Ask</div>
+          <div class="block-body">
+            <ul>
+              <li>What sort of room shapes give your team the most grief currently?</li>
+              <li>How often are you dealing with corridors with rooms branching off?</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block reinforce">
+          <div class="block-head"><span class="tag">R</span>Reinforce</div>
+          <div class="block-body">
+            <ul>
+              <li>This is the tool you'll use most. It's how you turn Tandm's first pass into exactly what you'd design yourself.</li>
+              <li>Notice that compliance is still being checked across the splits, they're virtual boundaries, not real ones. Tandm won't let you place sprinklers too close even if a split is between them.</li>
+              <li>Once you've got the rhythm of split-then-tweak, an hour-long room becomes a five-minute room.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scroll-hint">Next: Decode the orange walls Tandm shows you</div>
+      </article>
+
+      <!-- ============================================== -->
+      <!-- PHASE 8, Orange Walls                          -->
+      <!-- ============================================== -->
+      <article class="phase" data-phase="8">
+        <div class="phase-eyebrow"><span class="step">08</span> The Magic <span class="mode-badge">~4 min</span></div>
+        <h1 class="phase-title">Orange Walls</h1>
+        <p class="phase-summary">Two reasons Tandm flags an orange wall. Multiple ceiling heights (Ceiling Trace), or architect turned room bounding off (Wall Trace).</p>
+
+        <div class="block tell">
+          <div class="block-head"><span class="tag">T</span>Tell</div>
+          <div class="block-body">
+            <ul>
+              <li>When you see <strong>orange walls</strong>, Tandm is telling you something needs your attention.</li>
+              <li><strong>Reason 1, multiple ceiling heights in one room (or a bulkhead):</strong>
+                <ul>
+                  <li>Tandm's first pass treats the room as flat, then flags the nib wall between the heights.</li>
+                  <li>Two ways to resolve: push sprinklers far enough to spray below the obstruction, OR use Ceiling Trace.</li>
+                  <li>Ceiling Trace breaks the room into zones at each ceiling height and re-lays out the sprinklers per zone.</li>
+                </ul>
+              </li>
+              <li><strong>Reason 2, architect turned room bounding off:</strong>
+                <ul>
+                  <li>Common in residential apartments, internal walls don't bound rooms, so Revit sees one big space.</li>
+                  <li>I'll hit Wall Trace. Tandm rebuilds the walls and re-lays out the sprinklers.</li>
+                </ul>
+              </li>
+              <li>In both cases, Tandm is being honest with you about what it sees, then giving you the tool to fix it in one click.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block show">
+          <div class="block-head"><span class="tag">S</span>Show</div>
+          <div class="block-body">
+            <ul>
+              <li><strong>Multiple ceiling heights:</strong> find a room with orange walls. I'll toggle ceiling-height visibility, show the gradient (lightest highest, darkest lowest).</li>
+              <li>I'll show Grid Edit option: push sprinklers away until they turn blue, meaning spray below the bulkhead.</li>
+              <li>Then I'll show Ceiling Trace: one click, re-laid out per zone.</li>
+              <li><strong>Room bounding off:</strong> find an apartment with orange walls but no ceiling step.</li>
+              <li>I'll hit Wall Trace. Watch the walls and layout regenerate.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block ask">
+          <div class="block-head"><span class="tag">?</span>Ask</div>
+          <div class="block-body">
+            <ul>
+              <li>How often do you come across multiple ceiling heights in a single room, or bulkheads to design around?</li>
+              <li>Are you doing much apartment / residential work where architects play games with room bounding?</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block reinforce">
+          <div class="block-head"><span class="tag">R</span>Reinforce</div>
+          <div class="block-body">
+            <ul>
+              <li>Each one of these scenarios used to be a half-hour problem. Now it's two clicks.</li>
+              <li>Notice the pattern, Tandm flags what needs your judgement, and gives you the tool to act on it fast.</li>
+              <li>This is the difference between automation that hides problems and automation that surfaces them. Tandm always surfaces.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scroll-hint">Next: Mix hazard classes across the same floor</div>
+      </article>
+
+      <!-- ============================================== -->
+      <!-- PHASE 9, Hazard Classifications                -->
+      <!-- ============================================== -->
+      <article class="phase" data-phase="9">
+        <div class="phase-eyebrow"><span class="step">09</span> The Magic <span class="mode-badge">~2 min</span></div>
+        <h1 class="phase-title">Hazard Classifications</h1>
+        <p class="phase-summary">Mix hazard classes across the same floor. Change a room or a group of rooms, Tandm redesigns just those.</p>
+
+        <div class="block tell">
+          <div class="block-head"><span class="tag">T</span>Tell</div>
+          <div class="block-body">
+            <ul>
+              <li>Every room can have its <strong>own hazard class</strong>. Light hazard in offices, ordinary in storage, residential in apartments, all on the same floor.</li>
+              <li>Change a single room or select a group of rooms. Change the hazard class from the dropdown on the left.</li>
+              <li>Tandm clears those rooms and redesigns them to the new class.</li>
+              <li>You can also batch-change rooms using the filter button, select all rooms of a certain type and apply at once.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block show">
+          <div class="block-head"><span class="tag">S</span>Show</div>
+          <div class="block-body">
+            <ul>
+              <li>I'll find a room that should be ordinary hazard (storage, plant, kitchen).</li>
+              <li>I click the room. I'll change hazard class from the dropdown.</li>
+              <li>I'll hit Place Sprinklers.</li>
+              <li>I'll show the redesign, different spacing applied.</li>
+              <li>Then I'll select 3 rooms together. Then I'll repeat, show batch behaviour.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block ask">
+          <div class="block-head"><span class="tag">?</span>Ask</div>
+          <div class="block-body">
+            <ul>
+              <li>How often do you have mixed hazard classes on a single floor?</li>
+              <li>Do you typically design per-room or per-zone?</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block reinforce">
+          <div class="block-head"><span class="tag">R</span>Reinforce</div>
+          <div class="block-body">
+            <ul>
+              <li>Mixed hazard classes are usually a manual nightmare, remembering spacings, switching mid-floor, double-checking each room.</li>
+              <li>Here, it's a dropdown and a re-run. Tandm handles all the spacing logic for you.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scroll-hint">Next: Layer detectors and speakers on top</div>
+      </article>
+
+      <!-- ============================================== -->
+      <!-- PHASE 10, Detectors & Speakers                 -->
+      <!-- ============================================== -->
+      <article class="phase" data-phase="10">
+        <div class="phase-eyebrow"><span class="step">10</span> Dry Fire <span class="mode-badge">~5 min</span></div>
+        <h1 class="phase-title">Detectors &amp; Speakers</h1>
+        <p class="phase-summary">Layer detection on top of sprinklers in the same design space. Same tools, same colour code.</p>
+
+        <div class="block tell">
+          <div class="block-head"><span class="tag">T</span>Tell</div>
+          <div class="block-body">
+            <ul>
+              <li><strong>My calibration question first:</strong> "Do you guys also design dry fire? Smoke detectors, heat detectors, speakers?"</li>
+              <li>If <strong>no</strong>, I'll keep this section brief. I'll mention that Dry Fire exists and Tandm's working towards a fully integrated workflow, then move on.</li>
+              <li>If <strong>yes</strong>, I'll go in deeper.</li>
+              <li>Once your sprinkler design is done, you click the Detectors tab. Same workflow, Place Detectors, same colour code, same tools.</li>
+              <li>Tandm checks the <strong>900mm minimum clearance</strong> from air registers automatically.</li>
+              <li>Then I'll speakers, same approach. Spacing is a rule-of-thumb since speakers are largely discretionary.</li>
+              <li><strong>One design space, all three services.</strong> As you stack services, you get more clashes, and Tandm flags them visually so you decide what to move.</li>
+              <li>Dry Fire is currently <strong>MVP, released April 2026</strong>, which is why there's a meaningful launch discount on it.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block show">
+          <div class="block-head"><span class="tag">S</span>Show</div>
+          <div class="block-body">
+            <ul>
+              <li>I'll switch to the Detectors tab and hit Place Detectors.</li>
+              <li>We watch the layout appear, colour coded the same as sprinklers.</li>
+              <li>I'll show a clash with an air register being avoided automatically.</li>
+              <li>I'll switch to the Speakers tab and hit Place Speakers.</li>
+              <li>I'll show more clashes appearing as services stack, and the tools to move them.</li>
+              <li>I'll toggle visibility filters to show or hide service types.</li>
+            </ul>
+            <div class="callout show-contractor" style="margin-top:14px;">
+              <strong>I'll drop the Auscoast testimonial here:</strong><br>
+              "Tandm has changed the way we do business. We can get tenders out the door quicker, issue compliant designs in record time, save hours on redesign and our profitability has increased."<br>
+              <strong>Haydn Mackie, Director, Auscoast Fire Services</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="block ask">
+          <div class="block-head"><span class="tag">?</span>Ask</div>
+          <div class="block-body">
+            <ul>
+              <li>How much dry fire work do you take on currently? Is it a regular part of your portfolio, or opportunistic?</li>
+              <li>Do you tend to coordinate sprinklers and detection in one model, or treat them as separate workflows?</li>
+              <li class="show-contractor">Are you doing many EWIS speakers as part of your D&amp;C scope?</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block reinforce">
+          <div class="block-head"><span class="tag">R</span>Reinforce</div>
+          <div class="block-body">
+            <ul>
+              <li><strong>One design space, all services, coordinated.</strong></li>
+              <li>The detection workflow you're seeing is what's now in the MVP, built from feedback we got from designers like you.</li>
+              <li>Bundle pricing is meaningful right now while Dry Fire is MVP, most people are taking the bundle.</li>
+              <li class="show-contractor">For contractors who tender on combined wet and dry, this is the workflow that makes you faster than firms still doing detection manually.</li>
+              <li class="show-consultancy">For consultancies that occasionally do detection, this means you can take on dry-fire scope without it dragging out the project.</li>
+              <li class="show-solo">Even if dry fire is a side hustle for you, this is enough automation that it stops being a money-loser.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scroll-hint">Next: Push everything to the Revit model</div>
+      </article>
+
+      <!-- ============================================== -->
+      <!-- PHASE 11, Push to Revit                        -->
+      <!-- ============================================== -->
+      <article class="phase" data-phase="11">
+        <div class="phase-eyebrow"><span class="step">11</span> Wrap <span class="mode-badge">~2 min</span></div>
+        <h1 class="phase-title">Push to Revit</h1>
+        <p class="phase-summary">Export Devices. Everything lands in your live Revit model as if you placed it natively.</p>
+
+        <div class="block tell">
+          <div class="block-head"><span class="tag">T</span>Tell</div>
+          <div class="block-body">
+            <ul>
+              <li>Important to note: <strong>everything you've seen so far happens outside Revit</strong>, in Tandm's Fire Designer workspace.</li>
+              <li>Nothing in your Revit model changes until you hit <strong>Export Devices</strong>.</li>
+              <li>Once you do, all the sprinklers, detectors and speakers get pushed into Revit at the correct heights.</li>
+              <li>They're <strong>native Revit families</strong>, your families, your annotation, your schedules, exactly as if you placed them manually.</li>
+              <li><strong>You own the design.</strong> No watermarks, no IP claim from Tandm, no lock-in. If Tandm disappeared tomorrow, your designs keep working in Revit.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block show">
+          <div class="block-head"><span class="tag">S</span>Show</div>
+          <div class="block-body">
+            <ul>
+              <li>I'll hit <span class="kbd">Export Devices</span>.</li>
+              <li>I'll wait for the push (a minute or two for around 2,000 devices).</li>
+              <li>I'll switch to the Revit model view and show the sprinklers, detectors and speakers now in place.</li>
+              <li>I'll click one to show it's a normal Revit family with normal Revit properties.</li>
+              <li>I'll open a schedule briefly to show the families flow through normally.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block ask">
+          <div class="block-head"><span class="tag">?</span>Ask</div>
+          <div class="block-body">
+            <ul>
+              <li>How do you currently handle takeoffs and schedules? Tandm's output flows straight into your existing process.</li>
+              <li class="show-contractor">Do you have a typical workflow for handing off from designer to drafter? This export step is where that happens cleanly.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block reinforce">
+          <div class="block-head"><span class="tag">R</span>Reinforce</div>
+          <div class="block-body">
+            <ul>
+              <li>This is one of the questions we get most: <strong>who owns the design?</strong> The answer is always, you do, 100%.</li>
+              <li>Tandm's job is to compress the boring parts. Once your design is in Revit, it's yours.</li>
+              <li>That also means Tandm fits cleanly inside whatever your existing workflows are, Hyena calcs, VTi tools, drafter handoff, takeoffs, the lot.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scroll-hint">Next: Redesigns and the margin protection story</div>
+      </article>
+
+      <!-- ============================================== -->
+      <!-- PHASE 12, Redesign Workflow                    -->
+      <!-- ============================================== -->
+      <article class="phase" data-phase="12">
+        <div class="phase-eyebrow"><span class="step">12</span> Wrap <span class="mode-badge">~3 min</span></div>
+        <h1 class="phase-title">Redesign Workflow</h1>
+        <p class="phase-summary">Mech change? Architect moved a wall? Select the room or group, re-run Tandm just on those. Avoids new obstructions. Margin protected.</p>
+
+        <div class="block tell">
+          <div class="block-head"><span class="tag">T</span>Tell</div>
+          <div class="block-body">
+            <ul>
+              <li>Changes happen on every project. New mech layout, architect moves a wall, ceiling type changes mid-project.</li>
+              <li><strong>Tandm doesn't rebuild the whole floor for a change in one room.</strong> I'll select the room (or group), hit the Fire Designer button.</li>
+              <li>Tandm asks if you want to delete the existing sprinklers, say yes.</li>
+              <li>Then I'll Place Sprinklers. Tandm re-runs <strong>avoiding the new obstruction</strong>.</li>
+              <li>This is also how you experiment with hazard class changes, or test a different design approach on a single room.</li>
+              <li><strong>Workflow caveat.</strong> If you've grouped your sprinklers into a Revit model group (common on typical floors), re-running breaks the group. So I'd suggest using Tandm for the <strong>initial layout</strong> on those, and Revit's normal workflow for subsequent tweaks.</li>
+              <li><strong>Pipework caveat:</strong> if you've connected pipework, re-running deletes the sprinklers, you'd need to reconnect. So re-runs are best for layout changes, not single-sprinkler nudges.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block show">
+          <div class="block-head"><span class="tag">S</span>Show</div>
+          <div class="block-body">
+            <ul>
+              <li>I'll pick a room from the existing design. I'll drop a diffuser onto an existing sprinkler in the linked mech model.</li>
+              <li>I'll select the room. Click Fire Designer.</li>
+              <li>Tandm prompts to delete existing devices. I'll confirm.</li>
+              <li>I'll hit Place Sprinklers. We watch the new layout avoid the diffuser.</li>
+              <li>I'll hit Export Devices. Done in 30 seconds.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block ask">
+          <div class="block-head"><span class="tag">?</span>Ask</div>
+          <div class="block-body">
+            <ul>
+              <li class="show-contractor">How much time does your team currently lose to redesigns each year? On a busy project, can it run to days?</li>
+              <li class="show-consultancy">How much of your typical project budget gets eaten by late changes and redesigns?</li>
+              <li>What's your current process when the architect comes back with changes mid-design?</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block reinforce">
+          <div class="block-head"><span class="tag">R</span>Reinforce</div>
+          <div class="block-body">
+            <ul>
+              <li><strong>Redesigns are where margin goes to die.</strong> This is the protection.</li>
+              <li>You've already paid the cost of the first design. Every change after is pure margin erosion, unless you've got something like Tandm doing the re-run for you.</li>
+              <li class="show-contractor">For D&amp;C work especially, the speed of redesign turnaround is often the difference between a profitable job and a marginal one.</li>
+              <li class="show-consultancy">For consultancies, this is the difference between absorbing change orders silently and being able to push back with confidence.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scroll-hint">Next: The limitations conversation, be honest, be confident</div>
+      </article>
+
+      <!-- ============================================== -->
+      <!-- PHASE 13, Limitations                          -->
+      <!-- ============================================== -->
+      <article class="phase" data-phase="13">
+        <div class="phase-eyebrow"><span class="step">13</span> Wrap <span class="mode-badge">~3 min</span></div>
+        <h1 class="phase-title">Limitations</h1>
+        <p class="phase-summary">The honesty stack. Name them. Explain why. Roadmap. Dev team. Portfolio reframe.</p>
+
+        <div class="block tell">
+          <div class="block-head"><span class="tag">T</span>Tell</div>
+          <div class="block-body">
+            <ul>
+              <li>We're upfront about where Tandm is right now. Three things to flag:</li>
+              <li><strong>1. Native Revit only.</strong>
+                <ul>
+                  <li>IFCs and Archicad exports don't map cleanly into Revit rooms.</li>
+                  <li>Eight to nine developers full time. IFC and 2D CAD workflows are the next major workstream after Dry Fire MVP.</li>
+                </ul>
+              </li>
+              <li><strong>2. Sloping ceilings.</strong>
+                <ul>
+                  <li>Depends on how they're modelled. Hit and miss. Not advertised.</li>
+                  <li>Same roadmap workstream as the geometry rewrite.</li>
+                </ul>
+              </li>
+              <li><strong>3. Interconnected levels.</strong>
+                <ul>
+                  <li>Revit rooms are associated to one level. As soon as a space spills over, Tandm can't see it.</li>
+                  <li>Car parks are the classic example, multiple levels in one big space.</li>
+                  <li>Same roadmap.</li>
+                </ul>
+              </li>
+              <li>Concealed space sprinklers, not native today. There are workarounds, but it's also pipework-dependent, so it's queued behind the pipework roadmap.</li>
+              <li>We don't do pipework <strong>yet</strong>. That's the next major build after IFC and 2D, likely 12-plus months out. Right now Tandm gives you more time for pipework, rather than doing it for you.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block show">
+          <div class="block-head"><span class="tag">S</span>Show</div>
+          <div class="block-body">
+            <ul>
+              <li>If they ask about a specific limitation in detail, I'll offer to send the project file to Byron after the call. He'll do a quick assessment of Tandm fit before they commit.</li>
+              <li>If they ask about IFC specifically, I'll mention the active geometry-rewrite workstream.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block reinforce">
+          <div class="block-head"><span class="tag">R</span>Reinforce</div>
+          <div class="block-body">
+            <ul>
+              <li><strong>The portfolio reframe (this is the close on limitations):</strong></li>
+              <li>Where Tandm fits in your portfolio is the projects with native Revit models and standard floor plates, that's where it'll save you days.</li>
+              <li>Projects with sloping ceilings, IFCs, or interconnected levels stay manual today. We're actively building toward them.</li>
+              <li>Tandm doesn't have to do <strong>every</strong> project to be worth it, it just has to land brilliantly on the ones where it fits.</li>
+              <li><strong>The honesty stack pattern (use it for every limitation):</strong>
+                <ul>
+                  <li>Name the limitation plainly.</li>
+                  <li>Explain the technical why.</li>
+                  <li>State the roadmap commitment.</li>
+                  <li>Reference the active dev team (8-9 developers).</li>
+                  <li>Reframe to where it does fit.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scroll-hint">Next: ROI recap, offer, next steps</div>
+      </article>
+
+      <!-- ============================================== -->
+      <!-- PHASE 14, ROI & Close                          -->
+      <!-- ============================================== -->
+      <article class="phase" data-phase="14">
+        <div class="phase-eyebrow"><span class="step">14</span> Wrap <span class="mode-badge">~5 min</span></div>
+        <h1 class="phase-title">ROI &amp; Close</h1>
+        <p class="phase-summary">Refer back to the alignment session ROI, show the offer, the guarantee, and the next step.</p>
+
+        <div class="block tell">
+          <div class="block-head"><span class="tag">T</span>Tell</div>
+          <div class="block-body">
+            <ul>
+              <li>Quick recap on the ROI we ran in the alignment session.</li>
+              <li><strong>The maths:</strong> <span class="placeholder">[X levels × Y sqm × Z hours/level × $rate × N projects/year]</span></li>
+              <li><strong>The outcome:</strong> <span class="placeholder">[days saved]</span> back, <span class="placeholder">[$ saved]</span> on a sub-$5K investment.</li>
+              <li>And that's only one segment of your portfolio. Tandm isn't going to do every project, but where it lands in the sweet spot, <strong>it kicks like a mule</strong>.</li>
+              <li>I'll send you the link to the ROI calculator after this so you can play with your own numbers.</li>
+            </ul>
+            <div class="callout"><strong>Use the ROI button at the top</strong> to open the Estimator with the prospect's numbers from the alignment session already saved.</div>
+          </div>
+        </div>
+
+        <div class="block show">
+          <div class="block-head"><span class="tag">S</span>Show</div>
+          <div class="block-body">
+            <div class="show-contractor">
+              <span class="variant-label">For contractors: Auscoast testimonial</span>
+              <ul>
+                <li>"Tandm has changed the way we do business. We can get tenders out the door quicker, issue compliant designs in record time, save hours on redesign and our profitability has increased."</li>
+                <li><strong>Haydn Mackie, Director, Auscoast Fire Services</strong></li>
+              </ul>
+              <ul style="margin-top:14px;">
+                <li><strong>Troy at Plexus (WA):</strong> 12 months in, just renewed. 2,000 sprinklers in a single day. 4 to 5 days saved per project. Uses Tandm as a competitive advantage in WA.</li>
+                <li><strong>Tom Robson (Brisbane):</strong> 100 hours saved over 6 months. 92% of manual work eliminated. Figured out how to use Tandm on 2D CAD projects too.</li>
+              </ul>
+            </div>
+            <div class="show-consultancy">
+              <span class="variant-label">For consultancies</span>
+              <div class="skel">Mike to provide consultancy-specific testimonials. Omnii? Aurecon? Other consulting users to be confirmed.</div>
+              <ul style="margin-top:14px;">
+                <li>In the meantime, Tom Robson (Brisbane): 100 hours saved over 6 months. 92% of manual work eliminated. Figured out how to use Tandm on 2D CAD projects too.</li>
+                <li>International firm in alignment session: $140K annual labour savings and 73 design days returned, based on one office only.</li>
+              </ul>
+            </div>
+            <div class="show-solo">
+              <span class="variant-label">For solo / hybrid</span>
+              <ul>
+                <li>Even for solo operators, the Dry Fire side is interesting, it can let you take on detection scope at proper rates rather than turning it down because it's not worth your time.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="block tell">
+          <div class="block-head"><span class="tag">T</span>The Offer</div>
+          <div class="block-body">
+            <ul>
+              <li><strong>Wet seat alone:</strong> A$4,999 per year. Includes two live onboarding sessions where Byron works on your projects with your team, not a video, an actual project run-through.</li>
+              <li><strong>Dry Fire MVP:</strong> A$1,799 per year, currently <strong>40% off</strong> because it's MVP. You're getting in on the ground floor.</li>
+              <li><strong>Bundle (wet + dry):</strong> <span class="placeholder">[A$5,499, confirm]</span>. Most action is here right now.</li>
+              <li><strong>Hyena loyalty discount:</strong> existing Hyena users get an extra 10% off any of these.</li>
+              <li><strong>Expansion credits:</strong> if you want more seats later (within 60 days), 40% off additional seats. Up to 4 bonus credits per seat.</li>
+              <li><strong>Guided onboarding guarantee:</strong> If after the two onboarding sessions it's not delivering for you, you can pull out. Zero risk. No one's needed to use it yet, but it's there.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block reinforce">
+          <div class="block-head"><span class="tag">R</span>Reinforce</div>
+          <div class="block-body">
+            <ul>
+              <li>Since January 2026 we've had more sales than the previous 18 months combined. Tandm has crossed a threshold where firms are jumping on board.</li>
+              <li>We've got customers across consultancies and contractors, multi-disciplinary firms, solo operators, and recently bigger tier-one names. Also expanding into Europe and the US later this year.</li>
+              <li>The guided onboarding guarantee exists for one reason, <strong>we want to be in this with you</strong>. We don't want you carrying software you're not using. So if it's not landing, we'll back out gracefully.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block ask">
+          <div class="block-head"><span class="tag">?</span>Next Steps</div>
+          <div class="block-body">
+            <ul>
+              <li>I'll send you a summary today: questions and answers from this session, the ROI calculator link, the offer details, and the recording link.</li>
+              <li>Have a read through with your team and I'll check in next <span class="placeholder">[day]</span>.</li>
+              <li>Who's the best person for me to follow up with?</li>
+              <li>If you've got a current project model you'd like Byron to take a quick look at for Tandm fit, send it through and we'll give you an honest assessment before you commit.</li>
+              <li><strong>If the right people weren't on the call:</strong> I can offer a second session focused on Dry Fire for the wider team, or share the recording.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scroll-hint">End of demo. Send summary email within 24 hours.</div>
+      </article>
+
+    </section>
+
+    <!-- ===== RIGHT SIDEBAR ===== -->
+    <aside class="aside" id="aside">
+      <div class="aside-title">Common Questions</div>
+      <div id="qaList">
+        <!-- populated by JS based on active phase -->
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- ============ BOTTOM BAR ============ -->
+  <footer class="bottombar">
+    <div class="group">
+      <span class="group-label">Current Offer</span>
+      <span class="pill">Wet <strong>A$4,999</strong></span>
+      <span class="pill">Dry MVP <strong>A$1,799</strong> <em style="color:var(--gold); font-style:normal; font-size:10px; letter-spacing:0.06em;">40% off</em></span>
+      <span class="pill">Bundle <strong>A$5,499</strong> <em style="color:var(--gold); font-style:normal; font-size:10px; letter-spacing:0.06em;">confirm</em></span>
+      <span class="pill">Hyena <strong>−10%</strong></span>
+    </div>
+
+    <div class="group">
+      <span class="group-label">Safety net</span>
+      <span class="pill">Guided onboarding guarantee</span>
+    </div>
+
+    <div class="bottombar-nav">
+      <button id="prevBtn" class="secondary">← Prev</button>
+      <button id="nextBtn">Next →</button>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+// ============== prospect type toggle ==============
+const shell = document.querySelector('.shell');
+document.querySelectorAll('.proptype button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.proptype button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    shell.setAttribute('data-prospect', btn.dataset.type);
+  });
+});
+
+// ============== phase navigation ==============
+const phases = Array.from(document.querySelectorAll('.phase'));
+const navItems = Array.from(document.querySelectorAll('.nav-item'));
+let current = 1;
+const total = phases.length;
+
+function showPhase(n) {
+  current = Math.max(1, Math.min(total, n));
+  phases.forEach(p => p.classList.toggle('active', parseInt(p.dataset.phase) === current));
+  navItems.forEach(item => item.classList.toggle('active', parseInt(item.dataset.phase) === current));
+  document.getElementById('prevBtn').disabled = current === 1;
+  document.getElementById('nextBtn').disabled = current === total;
+  document.getElementById('panel').scrollTop = 0;
+  renderSidebar(current);
+}
+
+navItems.forEach(item => {
+  item.addEventListener('click', () => showPhase(parseInt(item.dataset.phase)));
+});
+document.getElementById('prevBtn').addEventListener('click', () => showPhase(current - 1));
+document.getElementById('nextBtn').addEventListener('click', () => showPhase(current + 1));
+
+// keyboard nav
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.key === 'ArrowRight') showPhase(current + 1);
+  if (e.key === 'ArrowLeft') showPhase(current - 1);
+});
+
+// ============== sidebar Q&A library ==============
+const sidebar = {
+  1: [
+    { q: "I haven't seen Tandm in a year, has much changed?", a: "Significantly. The product has evolved a lot in the last twelve months, particularly around design control, splitting, ceiling handling, and the Fire Designer workspace. Dry Fire MVP has also launched." },
+    { q: "Who's the typical user, consultant or contractor?", a: "Both. The product is built around fire designers regardless of where they sit. Consultancies use it for fast accurate layouts. Contractors use it for D&C tender response and redesign protection." },
+    { q: "How long does it take to learn?", a: "About a week to get comfortable. Mike came in with no Revit or fire background and was running Tandm within that time. The onboarding includes two live sessions on the prospect's actual projects." },
+    { q: "Is Tandm used in any of the big firms?", a: "Yes, names include Omnii. Recent traction includes some tier-one firms. Since January 2026, more sales than the previous 18 months combined." }
+  ],
+  2: [
+    { q: "Does it have to be Revit? What about Archicad or IFC?", a: "Right now, native Revit only. IFC conversions don't map cleanly into Revit rooms, which Tandm depends on. IFC and 2D CAD workflows are the next major workstream after Dry Fire MVP." },
+    { q: "Which Revit versions do you support?", a: "2022 through 2026. One installer; you pick the versions on install. 2027 coming once projects start being modelled in it." },
+    { q: "What if I'm running multiple Revit versions on different machines?", a: "Tandm can be installed across all versions on the same machine. Licences are tied to user email, same user can run Tandm across versions." },
+    { q: "Can the architect have Tandm too?", a: "Architects are a secondary target market. If they used it for their RCPs, your job would be a lot easier. Worth raising with the architects you work with most often." }
+  ],
+  3: [
+    { q: "Can I use my own families?", a: "Yes, and recommended. Load them into the Revit project as you normally would. As long as they're unhosted, they appear in the families list. Map to hazard class. Your families, your annotation, your output." },
+    { q: "Hosted vs unhosted families?", a: "Unhosted only. Hosted families break in too many edge cases, sloped ceilings, generic models, IFC conversions where the host doesn't stick. Unhosted is more flexible and Tandm places at correct heights anyway." },
+    { q: "Does it support extended coverage heads?", a: "Yes. Add a custom hazard class based on an existing one, edit any field, min/max spacing, wall distance, coverage. Map your custom family." },
+    { q: "What about flush or semi-recessed heads in specific areas?", a: "Create a custom hazard class for each (e.g. 'Flush light', 'Semi-recessed ordinary'), map the appropriate family, then apply to the relevant rooms." },
+    { q: "What about residential RASI heads with spray-pattern obstructions?", a: "Currently Tandm doesn't treat detectors as obstructions for sprinkler spray patterns. For residential projects, recommended workflow is to do detection first, then sprinklers. Building the cross-service obstruction check is on the roadmap." },
+    { q: "Can I use Victaulic families?", a: "Yes. Tandm ships with some Victaulic families through a partnership. You can also load your own." }
+  ],
+  4: [
+    { q: "What if the architect's model has missing rooms?", a: "Those areas just won't have Revit rooms created, and have to be designed manually. Tandm aims for 80% automation across 80% of rooms, perfect models don't exist." },
+    { q: "Does the architect need to have rooms set up?", a: "No. Tandm creates Revit rooms in your fire model using its own tool. You just need room bounding turned on for the architectural link." },
+    { q: "What about mezzanine levels?", a: "Watch the 'distance between floors' check when selecting the soffit. If it shows a tiny number, you've picked a mezzanine. Use limit and base offset to set the right range." },
+    { q: "Is the model central or linked?", a: "Both work. For linked architectural models, just ensure room bounding is turned on for the link." }
+  ],
+  5: [
+    { q: "What's checked as an obstruction?", a: "Anything in linked models, MEP services, lighting, electrical. Spray pattern obstruction is built into the placement engine. Tandm flags clashes with an orange sprinkler so the designer decides." },
+    { q: "What about ducts above the ceiling?", a: "Currently checks about 10–20mm above ceiling. Tandm doesn't yet check obstructions higher up in the ceiling void, that's still engineering judgement, but Tandm shows the ductwork so the designer can decide." },
+    { q: "What about concealed services in the ceiling?", a: "Tandm brings them into the Fire Designer for visibility, so you can see what's above the ceiling, but doesn't coordinate placement around them. Visibility filter lets you toggle them on / off." },
+    { q: "How does the colour code work?", a: "Blue = valid sprinkler in compliant position. Light green = coverage. Dark green = coverage overlap. Orange = invalid, needs designer attention. Red = out of rule. Orange wall = flag, multiple ceiling heights or room bounding turned off." },
+    { q: "What about meat rails, butchers rails, curtains, ceiling fans?", a: "As long as they're modelled correctly, Tandm treats them as obstructions. Some, like curtains, may need a bit more designer judgement than just the layout." }
+  ],
+  6: [
+    { q: "Can I just adjust manually instead of using grid edit?", a: "Yes, Free Edit lets you drag, add, and delete sprinklers freely with live measurements and compliance checks. Most designers prefer Grid Edit for new rooms and Free Edit for tweaks." },
+    { q: "Will it auto-align to lights?", a: "Yes, via the Align to Lights button. It finds the closest lights in the room and snaps the sprinkler row purple. Manual button because there can be multiple light orientations in a room." },
+    { q: "What's the shadowing threshold?", a: "Tandm flags shadowing over 1.4 square metres and may add a sprinkler. If you don't want any shadowing, just drag a sprinkler to cover it, the coverage updates live." },
+    { q: "Can I print or share from the Fire Designer before pushing to Revit?", a: "Not directly, Fire Designer is a working space. Once you push to Revit, you can share / print from Revit as normal." }
+  ],
+  7: [
+    { q: "How does Tandm handle rotated rooms?", a: "Grid always orientates to the longest wall in the room. Rotation doesn't matter, all the tools work as expected, with correct measurements." },
+    { q: "Can I delete a split if I made a mistake?", a: "Currently undo is the way, re-do or rewind your splits. Save your design at any point so you can revert to an earlier state. Improved split editing is on the immediate roadmap." },
+    { q: "What if I split after I've already manipulated the layout?", a: "Re-splitting will recalculate the layout for that zone. Best practice: do your splits first, then tweak. Manipulated sprinklers in adjacent zones won't be touched if you split a different zone." }
+  ],
+  8: [
+    { q: "What's the difference between Ceiling Trace and Wall Trace?", a: "Ceiling Trace handles multiple ceiling heights in one room, breaks them into individual zones and lays out sprinklers per zone. Wall Trace handles architects' models where room bounding was turned off on internal walls (common in apartments)." },
+    { q: "What about low-height partitions?", a: "They'll come through as orange walls. The designer's call, leave them, treat as obstructions via splitting, or use Wall Trace if you want them considered as room dividers." },
+    { q: "Are beam rules built in?", a: "Yes. Both for light and ordinary hazard, and for upright vs pendant. Built into the placement engine and the Grid Edit tool." }
+  ],
+  9: [
+    { q: "Can I mix hazard classes on one floor?", a: "Yes, every room can have its own hazard class. Change from the panel, re-run, done. You can batch-change groups of rooms too." }
+  ],
+  10: [
+    { q: "Is Dry Fire ready for production work?", a: "Yes, MVP released April 2026 with compliance checks live. The product is being actively developed but is in production use. There's a 40% launch discount that reflects MVP status." },
+    { q: "Does it cover heat detectors? Speakers?", a: "Yes to both. All within the same Fire Designer workspace as sprinklers." },
+    { q: "What's the air register clearance?", a: "Built in at 900mm minimum. Tandm checks automatically when placing detectors near air registers." },
+    { q: "What about SPL levels for speakers?", a: "Currently rule-of-thumb spacing rather than full SPL calculation, because speaker placement is largely discretionary. Performance-based SPL isn't built in." },
+    { q: "Do detectors and sprinklers share a workflow?", a: "Yes, same design space, same tools (grid edit, free edit, splitting, align), same colour code. Just different tabs in the Fire Designer." },
+    { q: "Can I show detection and sprinklers on separate sheets in Revit?", a: "Yes, they're all native Revit families. Control visibility per sheet to show detection on one RCP and sprinklers on another." }
+  ],
+  11: [
+    { q: "Once it's in Revit, who owns the design?", a: "You do, 100%. No watermarks, no IP claim, no lock-in. Use your own families and it's as if you placed everything natively." },
+    { q: "Can I do quantity takeoffs?", a: "Yes, once devices are in Revit, use your normal Revit scheduling and takeoff process. Tandm doesn't have a separate takeoff tool, because Revit already does it well." },
+    { q: "What about Hyena calcs integration?", a: "Not directly integrated yet. Hyena is the sister company, integration is on the roadmap, likely alongside pipework automation when it lands." }
+  ],
+  12: [
+    { q: "What if I've grouped my sprinklers as a Revit model group?", a: "Re-running breaks the group because Tandm deletes and re-places. For typical floors with groups, use Tandm for the initial layout only, then Revit's normal workflow for changes." },
+    { q: "Will Tandm respect existing pipework connections?", a: "No, re-running deletes the sprinklers, you'd reconnect to pipework afterward. So re-runs are best for layout changes, not minor sprinkler nudges. Move single sprinklers manually in Revit." },
+    { q: "Can I bring an existing design back into Tandm to check compliance?", a: "Not yet. Currently the workflow is rerun rather than retrofit. Existing-design compliance checking is on the roadmap." }
+  ],
+  13: [
+    { q: "When will IFC support land?", a: "Next major workstream after Dry Fire MVP. Bringing geometry in differently is the strategic focus, and that will also unlock sloping ceilings and interconnected levels." },
+    { q: "What about pipework automation?", a: "Not in Tandm today. Roadmap, alongside closer Hyena integration. Right now Tandm gives you more time for pipework, rather than doing it for you. Pipework alone is at least a year of dev work to do well." },
+    { q: "What about concealed space?", a: "Not native today, concealed space layouts are pipework-dependent, so it's queued behind pipework on the roadmap. Some advanced users have found workarounds." },
+    { q: "What about hydrant systems / underground?", a: "Not Tandm's sweet spot, Tandm is focused on below-ceiling sprinkler and detection layouts. Hydrants and underground remain manual." },
+    { q: "Does AI play a role?", a: "Tandm isn't AI-driven, it's built from standards for compliance. AI can give good results but is unpredictable. From a fire design perspective, you're either compliant or you're not, Tandm's engine is deterministic." }
+  ],
+  14: [
+    { q: "Is the offer fixed or negotiable?", a: "Standard offer. Hyena users get an extra 10%. Volume on additional seats earns expansion credits (40% off, up to 4 bonus credits, 60 days). Guided onboarding guarantee de-risks the commitment." },
+    { q: "What if my team doesn't end up using it?", a: "That's exactly what the onboarding guarantee covers. Two live sessions on your actual projects; if it's not landing, you can exit. No one's needed to use it yet." },
+    { q: "How are seats licensed?", a: "Per user, tied to email address. Reassignable to other users later. Similar to Revit's licensing model." },
+    { q: "Can I trial before committing?", a: "The guided onboarding guarantee replaces the old trial model. We work with you live on your projects for two sessions. If it doesn't deliver, you can pull out. We moved away from trials because they tended to drift and never finish." },
+    { q: "Can Byron review one of my project files before I commit?", a: "Yes, happy to. Send a stripped Revit file and Byron will give you an honest read on Tandm fit." },
+    { q: "What's the implementation timeline?", a: "Once you commit, onboarding sessions get scheduled to suit your team. Most people are running Tandm on a live project within two weeks." }
+  ]
+};
+
+function renderSidebar(phaseNum) {
+  const list = document.getElementById('qaList');
+  list.innerHTML = '';
+  const items = sidebar[phaseNum] || [];
+  if (items.length === 0) {
+    list.innerHTML = '<div class="skel">No common questions logged yet for this phase.</div>';
+    return;
+  }
+  items.forEach(item => {
+    const wrap = document.createElement('div');
+    wrap.className = 'qa';
+    wrap.innerHTML = `<div class="qa-q">${item.q}</div><div class="qa-a">${item.a}</div>`;
+    list.appendChild(wrap);
+  });
+}
+
+renderSidebar(1);
+</script>
+</body>
+</html>
