@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tandm Demo Companion, Mike's Guide</title>
+<title>Tandm Demo Companion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -226,14 +226,16 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* ---------- CENTRE PANEL ---------- */
 .panel {
-  padding: 36px 44px 80px;
+  padding: 36px clamp(28px, 4vw, 60px) 80px;
   overflow-y: auto;
   background: var(--paper);
   height: 100%;
 }
 .phase {
   display: none;
-  max-width: 720px;
+  max-width: 920px;
+  width: 100%;
+  margin: 0 auto;
 }
 .phase.active { display: block; }
 
@@ -414,31 +416,92 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   border-bottom: 1px solid var(--line);
 }
 .qa {
-  border-bottom: 1px dashed var(--line);
-  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
 }
 .qa:last-child { border-bottom: none; }
 .qa-q {
   font-family: var(--sans);
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 14.5px;
+  font-weight: 500;
   color: var(--ink);
-  margin-bottom: 7px;
-  line-height: 1.35;
+  line-height: 1.4;
+  padding: 12px 28px 12px 0;
+  cursor: pointer;
+  position: relative;
+  display: block;
+  transition: color 0.15s;
+}
+.qa-q:hover {
+  color: var(--blue);
 }
 .qa-q::before {
-  content: "Q. ";
+  content: "Q.";
   color: var(--blue);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
   font-style: normal;
   letter-spacing: 0.08em;
+  margin-right: 6px;
+}
+.qa-q::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 12px;
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--muted);
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+  line-height: 1;
+}
+.qa.open .qa-q::after {
+  content: "−";
+  color: var(--blue);
+}
+.qa.open .qa-q {
+  color: var(--blue);
+  font-weight: 600;
 }
 .qa-a {
-  font-size: 14.5px;
+  font-size: 14px;
   line-height: 1.55;
   color: #2a3548;
+  padding: 0 0 14px 0;
+  display: none;
+}
+.qa.open .qa-a {
+  display: block;
+}
+.aside-actions {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.aside-actions button {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 4px 8px;
+  border-radius: 3px;
+  background: transparent;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.aside-actions button:hover {
+  color: var(--blue);
+  border-color: var(--blue);
 }
 
 /* ---------- BOTTOM BAR ---------- */
@@ -551,6 +614,302 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-size: 13.5px;
 }
 
+/* ---------- MOUSE MOVES CALLOUT (instructions to Mike, not script) ---------- */
+.mouse-moves {
+  background: #f4f1ec;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--ink);
+  border-radius: 4px;
+  padding: 14px 16px 14px 18px;
+  margin: 14px 0;
+  font-family: var(--mono);
+}
+.mouse-moves-label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mouse-moves-label::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 16px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e1a30' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M9 2h6a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3z'/><path d='M12 8v4'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.mouse-moves ol {
+  list-style: none;
+  counter-reset: mouse-step;
+  padding-left: 0;
+  margin: 0;
+}
+.mouse-moves ol li {
+  counter-increment: mouse-step;
+  position: relative;
+  padding-left: 32px;
+  margin-bottom: 8px;
+  font-family: var(--mono);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.mouse-moves ol li:last-child { margin-bottom: 0; }
+.mouse-moves ol li::before {
+  content: counter(mouse-step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 22px;
+  height: 22px;
+  background: var(--ink);
+  color: white;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--mono);
+}
+.mouse-moves kbd, .mouse-moves .key {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: white;
+  border: 1px solid var(--ink);
+  border-bottom-width: 2px;
+  padding: 1px 7px;
+  border-radius: 3px;
+  font-weight: 600;
+  color: var(--ink);
+  display: inline-block;
+  line-height: 1.3;
+}
+
+/* ---------- PROCESSING TIME QUESTIONS CALLOUT ---------- */
+.processing-questions {
+  background: linear-gradient(180deg, #fff8ec 0%, #fff 100%);
+  border: 1px solid #e6cf95;
+  border-left: 4px solid var(--gold);
+  border-radius: 4px;
+  padding: 14px 16px;
+  margin: 16px 0;
+}
+.processing-questions-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #735311;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.processing-questions-label::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23735311' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><polyline points='12 6 12 12 16 14'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.processing-questions-tip {
+  font-size: 13px;
+  color: #735311;
+  margin-bottom: 10px;
+  line-height: 1.4;
+  font-style: italic;
+}
+.processing-questions ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.processing-questions ul li {
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 7px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+.processing-questions ul li:last-child { margin-bottom: 0; }
+.processing-questions ul li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--gold);
+  font-weight: 700;
+  font-family: var(--mono);
+}
+
+/* ---------- DEMO PREP CHECKLIST ---------- */
+.prep-checklist {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 18px 20px;
+  margin: 14px 0;
+}
+.prep-checklist h4 {
+  font-size: 14px;
+  margin: 0 0 12px;
+  text-transform: uppercase;
+  font-family: var(--mono);
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  font-weight: 600;
+}
+.prep-checklist ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.prep-checklist ul li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 10px;
+  font-size: 15.5px;
+  line-height: 1.45;
+}
+.prep-checklist ul li:last-child { margin-bottom: 0; }
+.prep-checklist ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--line);
+  border-radius: 3px;
+  background: white;
+}
+.prep-checklist ul li input[type="checkbox"] {
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: var(--blue);
+  z-index: 2;
+}
+.prep-checklist ul li input[type="checkbox"]:checked + .prep-label {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+/* ---------- PROSPECT SETUP PANEL ---------- */
+.prospect-setup {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 22px 24px;
+  margin: 14px 0;
+  box-shadow: var(--shadow);
+}
+.prospect-setup h4 {
+  font-size: 14px;
+  margin: 0 0 4px;
+  text-transform: uppercase;
+  font-family: var(--mono);
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  font-weight: 600;
+}
+.prospect-setup .sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.prospect-setup .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 18px;
+}
+.prospect-setup .field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.prospect-setup .field label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  font-weight: 500;
+}
+.prospect-setup .field input {
+  font-family: var(--sans);
+  font-size: 14.5px;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+  transition: all 0.15s;
+}
+.prospect-setup .field input:focus {
+  outline: none;
+  border-color: var(--blue);
+  background: white;
+}
+.prospect-setup .actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.prospect-setup .actions .status {
+  font-size: 12.5px;
+  color: var(--muted);
+  font-style: italic;
+}
+.prospect-setup .actions .status.saved {
+  color: var(--green);
+  font-style: normal;
+}
+.prospect-setup .actions button {
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 6px 12px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink);
+  cursor: pointer;
+}
+.prospect-setup .actions button:hover {
+  background: var(--paper);
+}
+.prospect-setup .actions button.primary {
+  background: var(--blue);
+  color: white;
+  border-color: var(--blue);
+}
+
+/* Filled placeholders look different from empty ones */
+.placeholder.filled {
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-style: normal;
+  font-weight: 500;
+}
+
+
 .legend-row {
   display: flex;
   gap: 8px;
@@ -607,6 +966,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   margin-left: 8px;
 }
 
+@media (min-width: 1600px) {
+  .main { grid-template-columns: 280px 1fr 380px; }
+}
+@media (min-width: 1900px) {
+  .main { grid-template-columns: 300px 1fr 420px; }
+}
 @media (max-width: 1280px) {
   .main { grid-template-columns: 230px 1fr 300px; }
 }
@@ -662,9 +1027,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
     <!-- ===== LEFT NAV ===== -->
     <nav class="nav" aria-label="Demo phases">
-      <div class="nav-section-title">Open</div>
+      <div class="nav-section-title">Prep</div>
       <ol>
-        <li class="nav-item active" data-phase="1"><span class="num">01</span><span class="lbl">Welcome &amp; Recap</span></li>
+        <li class="nav-item active" data-phase="0"><span class="num">00</span><span class="lbl">Before You Start</span></li>
+      </ol>
+
+      <div class="nav-section-title">Open</div>
+      <ol start="1">
+        <li class="nav-item" data-phase="1"><span class="num">01</span><span class="lbl">Welcome &amp; Recap</span></li>
         <li class="nav-item" data-phase="2"><span class="num">02</span><span class="lbl">Set the Scene</span></li>
       </ol>
 
@@ -701,9 +1071,104 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <section class="panel" id="panel">
 
       <!-- ============================================== -->
+      <!-- PHASE 0, Before You Start                       -->
+      <!-- ============================================== -->
+      <article class="phase active" data-phase="0">
+        <div class="phase-eyebrow"><span class="step">00</span> Prep <span class="mode-badge">5 min before</span></div>
+        <h1 class="phase-title">Before You Start</h1>
+        <p class="phase-summary">Two things to do before the demo, in this order. First, tick off the machine prep checklist (some steps may require a restart, so do this first). Then fill in this prospect's details and they'll flow through every phase.</p>
+
+        <div class="block show">
+          <div class="block-head"><span class="tag">M</span>Machine Prep <span style="font-family:var(--mono); font-size:11px; letter-spacing:0.12em; color:var(--muted); margin-left:8px; text-transform:uppercase;">Step 1</span></div>
+          <div class="block-body">
+            <div class="prep-checklist">
+              <h4>Run this checklist 5 minutes before the call</h4>
+              <p style="font-size: 13px; color: var(--muted); margin-bottom: 14px; line-height: 1.4;">Do this <strong>before</strong> filling in prospect data below, in case a restart is needed. Prospect data is saved in your browser, but it's safer to set this up cleanly.</p>
+              <ul>
+                <li><input type="checkbox" id="prep1"><label for="prep1" class="prep-label"><strong>Close Chrome and other apps</strong>. Heavy machine load makes Revit crawl, especially during room creation and dry fire passes.</label></li>
+                <li><input type="checkbox" id="prep2"><label for="prep2" class="prep-label"><strong>If your machine has been on a while, restart it</strong>. Revit performance degrades on long-running sessions.</label></li>
+                <li><input type="checkbox" id="prep3"><label for="prep3" class="prep-label"><strong>Open the Tandm Hospital model in Revit</strong>, ready to share when the call starts.</label></li>
+                <li><input type="checkbox" id="prep4"><label for="prep4" class="prep-label"><strong>Mute notifications</strong>. Close Slack, Teams notifications, anything that might pop up over the screen share.</label></li>
+                <li><input type="checkbox" id="prep5"><label for="prep5" class="prep-label"><strong>Confirm your screen share works</strong> as soon as the call connects. Test it before opening the model.</label></li>
+                <li><input type="checkbox" id="prep6"><label for="prep6" class="prep-label"><strong>Have this companion open on a second screen</strong> or in a window beside the demo.</label></li>
+                <li><input type="checkbox" id="prep7"><label for="prep7" class="prep-label"><strong>Have your follow-up summary template ready to fire after the call</strong>. Aim to send within 24 hours while the demo is fresh.</label></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="block tell">
+          <div class="block-head"><span class="tag">P</span>Prospect Setup <span style="font-family:var(--mono); font-size:11px; letter-spacing:0.12em; color:var(--muted); margin-left:8px; text-transform:uppercase;">Step 2</span></div>
+          <div class="block-body">
+            <div class="prospect-setup">
+              <h4>Fill in once, used everywhere</h4>
+              <p class="sub">These values flow through to every placeholder in the demo. Click Save to lock them in. Data is stored locally in your browser, so it stays here after refresh.</p>
+              <div class="grid">
+                <div class="field">
+                  <label for="ps-prospect">Prospect / firm name</label>
+                  <input type="text" id="ps-prospect" placeholder="e.g. Bayside Fire Services">
+                </div>
+                <div class="field">
+                  <label for="ps-designers">Number of designers</label>
+                  <input type="text" id="ps-designers" placeholder="e.g. 4">
+                </div>
+                <div class="field">
+                  <label for="ps-mix">Portfolio mix</label>
+                  <input type="text" id="ps-mix" placeholder="e.g. residential and commercial">
+                </div>
+                <div class="field">
+                  <label for="ps-revit">Revit usage</label>
+                  <input type="text" id="ps-revit" placeholder="e.g. 80%">
+                </div>
+                <div class="field">
+                  <label for="ps-manual-time">Manual layout time (anchor)</label>
+                  <input type="text" id="ps-manual-time" placeholder="e.g. 3 days">
+                </div>
+                <div class="field">
+                  <label for="ps-followup-day">Follow-up day</label>
+                  <input type="text" id="ps-followup-day" placeholder="e.g. Wednesday">
+                </div>
+                <div class="field">
+                  <label for="ps-roi-maths">ROI maths (from alignment)</label>
+                  <input type="text" id="ps-roi-maths" placeholder="e.g. 4 levels x 9000sqm x 5hrs x $180 x 12">
+                </div>
+                <div class="field">
+                  <label for="ps-roi-days">ROI days saved</label>
+                  <input type="text" id="ps-roi-days" placeholder="e.g. 73 days">
+                </div>
+                <div class="field">
+                  <label for="ps-roi-dollars">ROI $ saved per year</label>
+                  <input type="text" id="ps-roi-dollars" placeholder="e.g. A$140,000">
+                </div>
+              </div>
+              <div class="actions">
+                <span class="status" id="ps-status">Not saved yet</span>
+                <div>
+                  <button id="ps-clear">Clear all</button>
+                  <button id="ps-save" class="primary">Save and apply</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="block reinforce">
+          <div class="block-head"><span class="tag">!</span>Two principles for the whole demo</div>
+          <div class="block-body">
+            <ul>
+              <li><strong>Never let silence happen.</strong> Revit takes time to think on some steps (first layout, detectors, push to Revit). Use that time to ask questions about the prospect: what projects they're on, what tools they currently use, where their biggest design bottlenecks are. Each phase with a long wait has a "Processing Time Questions" box ready to go.</li>
+              <li><strong>Pre-empt the hard questions.</strong> If you know they'll ask something hard (why so many clashes on dry fire? when's IFC support coming? what about pipework?), bring it up yourself first. It builds trust and stops them probing.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scroll-hint">Next: Welcome the prospect, recap the alignment session</div>
+      </article>
+
+      <!-- ============================================== -->
       <!-- PHASE 1, Welcome & Recap                       -->
       <!-- ============================================== -->
-      <article class="phase active" data-phase="1">
+      <article class="phase" data-phase="1">
         <div class="phase-eyebrow"><span class="step">01</span> Open <span class="mode-badge">~3 min</span></div>
         <h1 class="phase-title">Welcome &amp; Recap</h1>
         <p class="phase-summary">Open warmly, recap the alignment session, set expectations, and confirm who's in the room.</p>
@@ -712,8 +1177,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <div class="block-head"><span class="tag">T</span>Tell</div>
           <div class="block-body">
             <ul>
-              <li>Thanks so much for jumping on, I really appreciate the time, especially given how busy you all are.</li>
-              <li>Just a quick recap from our alignment session a couple of weeks back. You've got <span class="placeholder">[X designers]</span>, your portfolio leans <span class="placeholder">[mix]</span>, and you're running about <span class="placeholder">[Y%]</span> Revit.</li>
+              <li>Thanks so much for jumping on, <span class="placeholder" data-fill="prospect">[team at firm]</span>. I really appreciate the time, especially given how busy you all are.</li>
+              <li>Just a quick recap from our alignment session a couple of weeks back. You've got <span class="placeholder" data-fill="designers">[X designers]</span>, your portfolio leans <span class="placeholder" data-fill="mix">[mix]</span>, and you're running about <span class="placeholder" data-fill="revit">[Y%]</span> Revit.</li>
               <li>I'm Mike, Head of Customer Success at Tandm.</li>
               <li>Upfront, I'm not a fire designer. I came in with no Revit or fire background and got comfortable with Tandm in about a week, which says something about how the tool's been built.</li>
               <li>Anything technical I can't answer, I'll note down and come straight back to you, or loop in Byron, our product expert who built this.</li>
@@ -726,9 +1191,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <div class="block-head"><span class="tag">S</span>Show</div>
           <div class="block-body">
             <ul>
-              <li>I'll have the Tandm Hospital model open in Revit, ready to share.</li>
-              <li>I'll confirm the screen share is visible before I start the demo proper.</li>
-              <li>I'll mute notifications and close anything sensitive in other tabs.</li>
+              <li>I'll share my screen with the Tandm Hospital model open in Revit.</li>
+              <li>If I haven't already, this is where I run through the Demo Prep checklist (close Chrome, mute notifications, confirm screen share).</li>
             </ul>
           </div>
         </div>
@@ -818,7 +1282,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <div class="block-body">
             <ul>
               <li><strong>My anchor question.</strong> Just to gauge things, how long would it take you to place those 1,000 sprinklers on a floor plate this size, manually?</li>
-              <li>I'm expecting 2 to 5 days. Whatever they say, I'll lock it in.</li>
+              <li>I'm expecting 2 to 5 days. From alignment, they said <span class="placeholder" data-fill="manual-time">[manual time]</span>. I'll confirm that number is still in their head.</li>
               <li>I'll write the number down on a sticky note. I'll come back to it at the close.</li>
             </ul>
           </div>
@@ -1003,6 +1467,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           </div>
         </div>
 
+        <div class="processing-questions">
+          <div class="processing-questions-label">Processing Time Questions</div>
+          <p class="processing-questions-tip">The first layout pass takes 30 to 60 seconds. Don't go silent. Pick a question and keep the conversation moving while Tandm runs.</p>
+          <ul>
+            <li>What sort of projects are you working on at the moment?</li>
+            <li>What is your team's biggest bottleneck on a typical fire design right now?</li>
+            <li>What is your current Revit setup? Are designers working in central files, or each in their own?</li>
+            <li>What is your typical project size? Number of levels, square metres?</li>
+            <li class="show-contractor">When you tender on D&amp;C, how long do you usually have from RFT to submission?</li>
+            <li class="show-consultancy">How is your team structured? Mostly senior designers, or are you bringing in juniors?</li>
+          </ul>
+        </div>
+
         <div class="block ask">
           <div class="block-head"><span class="tag">?</span>Ask</div>
           <div class="block-body">
@@ -1174,21 +1651,22 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <div class="block-head"><span class="tag">T</span>Tell</div>
           <div class="block-body">
             <ul>
-              <li>When you see <strong>orange walls</strong>, Tandm is telling you something needs your attention.</li>
-              <li><strong>Reason 1, multiple ceiling heights in one room (or a bulkhead):</strong>
+              <li>When you see <strong>orange walls</strong>, Tandm is flagging something that needs my attention. There are two reasons it happens.</li>
+              <li><strong>Reason 1, multiple ceiling heights in one room (or a bulkhead).</strong>
                 <ul>
-                  <li>Tandm's first pass treats the room as flat, then flags the nib wall between the heights.</li>
-                  <li>Two ways to resolve: push sprinklers far enough to spray below the obstruction, OR use Ceiling Trace.</li>
-                  <li>Ceiling Trace breaks the room into zones at each ceiling height and re-lays out the sprinklers per zone.</li>
+                  <li>Tandm's first pass treats the room as flat, so it flags the nib wall between the different ceiling heights.</li>
+                  <li>Two ways to resolve. The first is manual adjustment using Grid Edit, pushing sprinklers far enough that they spray below the obstruction. The second is Ceiling Trace, which is the one I prefer.</li>
+                  <li>Ceiling Trace detects the different ceiling zones automatically, splits the room based on that geometry, and recalculates the layout for each zone independently. One click instead of moving every sprinkler manually.</li>
                 </ul>
               </li>
-              <li><strong>Reason 2, architect turned room bounding off:</strong>
+              <li><strong>Reason 2, the architect has turned room bounding off on certain walls.</strong>
                 <ul>
-                  <li>Common in residential apartments, internal walls don't bound rooms, so Revit sees one big space.</li>
-                  <li>I'll hit Wall Trace. Tandm rebuilds the walls and re-lays out the sprinklers.</li>
+                  <li>This is just how some architects model rooms, especially in apartment and residential projects. When Revit creates rooms with room bounding turned off on internal walls, it ignores those walls and creates one big room around the outer perimeter instead of separating the spaces individually.</li>
+                  <li>The data is all there in the model. It is just that Revit's room definition does not match what we see visually.</li>
+                  <li>Wall Trace lets me bypass the room definition and work straight from the actual wall geometry. Tandm reads the walls directly and rebuilds the layout based on them.</li>
                 </ul>
               </li>
-              <li>In both cases, Tandm is being honest with you about what it sees, then giving you the tool to fix it in one click.</li>
+              <li>In both cases, Tandm shows me what needs attention and gives me the tool to handle it in one click.</li>
             </ul>
           </div>
         </div>
@@ -1197,11 +1675,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <div class="block-head"><span class="tag">S</span>Show</div>
           <div class="block-body">
             <ul>
-              <li><strong>Multiple ceiling heights:</strong> find a room with orange walls. I'll toggle ceiling-height visibility, show the gradient (lightest highest, darkest lowest).</li>
-              <li>I'll show Grid Edit option: push sprinklers away until they turn blue, meaning spray below the bulkhead.</li>
-              <li>Then I'll show Ceiling Trace: one click, re-laid out per zone.</li>
-              <li><strong>Room bounding off:</strong> find an apartment with orange walls but no ceiling step.</li>
-              <li>I'll hit Wall Trace. Watch the walls and layout regenerate.</li>
+              <li><strong>Multiple ceiling heights.</strong> I'll find a room with orange walls. I'll toggle ceiling-height visibility so we can see the gradient.</li>
+              <li><strong>Reading the gradient:</strong> the <strong>lighter colour is the highest</strong> ceiling, the medium colour is in between, and the darkest colour is the lowest. So a darker shade next to a lighter shade is a step down in the ceiling.</li>
+              <li>I'll show the Grid Edit option first: push sprinklers away until they turn blue, meaning they will spray below the bulkhead.</li>
+              <li>Then I'll show Ceiling Trace as the cleaner alternative. Select the room, click Ceiling Trace, watch it re-lay out per zone in one click.</li>
+              <li><strong>Room bounding off.</strong> I'll find an apartment with orange walls but no ceiling step. I'll hit Wall Trace and we watch the walls and layout regenerate together.</li>
             </ul>
           </div>
         </div>
@@ -1292,20 +1770,25 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       <article class="phase" data-phase="10">
         <div class="phase-eyebrow"><span class="step">10</span> Dry Fire <span class="mode-badge">~5 min</span></div>
         <h1 class="phase-title">Detectors &amp; Speakers</h1>
-        <p class="phase-summary">Layer detection on top of sprinklers in the same design space. Same tools, same colour code.</p>
+        <p class="phase-summary">Layer detection on top of sprinklers in the same design space. Same tools, same colour code, same compliance engine.</p>
 
         <div class="block tell">
           <div class="block-head"><span class="tag">T</span>Tell</div>
           <div class="block-body">
             <ul>
-              <li><strong>My calibration question first:</strong> "Do you guys also design dry fire? Smoke detectors, heat detectors, speakers?"</li>
-              <li>If <strong>no</strong>, I'll keep this section brief. I'll mention that Dry Fire exists and Tandm's working towards a fully integrated workflow, then move on.</li>
-              <li>If <strong>yes</strong>, I'll go in deeper.</li>
-              <li>Once your sprinkler design is done, you click the Detectors tab. Same workflow, Place Detectors, same colour code, same tools.</li>
+              <li><strong>My calibration question first.</strong> "Do you also design dry fire? Smoke detectors, heat detectors, speakers?"</li>
+              <li>If <strong>no</strong>, I keep this section brief. I'll mention Dry Fire exists and that we're building towards a fully integrated wet plus dry workflow, then move on.</li>
+              <li>If <strong>yes</strong>, I'll go deeper.</li>
+              <li>Once the sprinkler design is done, I switch to the Detectors tab. Same workflow, Place Detectors, same colour code, same tools as I just showed you for sprinklers. <strong>All the compliance is built in</strong>.</li>
               <li>Tandm checks the <strong>900mm minimum clearance</strong> from air registers automatically.</li>
-              <li>Then I'll speakers, same approach. Spacing is a rule-of-thumb since speakers are largely discretionary.</li>
-              <li><strong>One design space, all three services.</strong> As you stack services, you get more clashes, and Tandm flags them visually so you decide what to move.</li>
-              <li>Dry Fire is currently <strong>MVP, released April 2026</strong>, which is why there's a meaningful launch discount on it.</li>
+              <li>Then I move to speakers, same approach. One thing to note on speakers, there is <strong>no standard spacing</strong>. These are rules of thumb that designers generally use, and it is up to your team to determine what you apply per project.</li>
+              <li><strong>Pre-empt before they ask.</strong> When the speakers layout shows up, there will be more clashes than the sprinkler pass had. I want to call this out before they do:
+                <ul>
+                  <li>"You will see more clashes here. That is just where the engine is in terms of coordinating three different services at the same time."</li>
+                  <li>"It is reflected in the 40% Dry Fire discount we are offering with this release."</li>
+                  <li>"As the product gets better and requires less manual rework, that is when we will start closing that gap."</li>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>
@@ -1317,16 +1800,30 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
               <li>I'll switch to the Detectors tab and hit Place Detectors.</li>
               <li>We watch the layout appear, colour coded the same as sprinklers.</li>
               <li>I'll show a clash with an air register being avoided automatically.</li>
-              <li>I'll switch to the Speakers tab and hit Place Speakers.</li>
-              <li>I'll show more clashes appearing as services stack, and the tools to move them.</li>
+              <li>I'll move a couple of detectors around to demonstrate the tools work the same way. I do not need to resolve the whole floor, just show the workflow.</li>
+              <li><strong>Zoom out moment on detectors.</strong> Once they are placed, I zoom out. "There is obviously a lot of green, but there are also areas that still need attention. That just happens as you start coordinating more services."</li>
+              <li>Then I'll switch to the Speakers tab and hit Place Speakers (roughly 500 speakers).</li>
+              <li>I'll pre-empt the clashes question with the MVP framing before they ask.</li>
               <li>I'll toggle visibility filters to show or hide service types.</li>
             </ul>
             <div class="callout show-contractor" style="margin-top:14px;">
-              <strong>I'll drop the Auscoast testimonial here:</strong><br>
+              <strong>Auscoast testimonial to drop here:</strong><br>
               "Tandm has changed the way we do business. We can get tenders out the door quicker, issue compliant designs in record time, save hours on redesign and our profitability has increased."<br>
               <strong>Haydn Mackie, Director, Auscoast Fire Services</strong>
             </div>
           </div>
+        </div>
+
+        <div class="processing-questions">
+          <div class="processing-questions-label">Processing Time Questions</div>
+          <p class="processing-questions-tip">Detector and speaker passes can take 30 to 60 seconds. Don't let it go silent. Pick a question and keep them engaged.</p>
+          <ul>
+            <li>What does your current dry fire workflow look like? Are you doing detection in Revit, or in another tool?</li>
+            <li>What is the split for you between wet fire and dry fire work, roughly?</li>
+            <li>How often do you have to coordinate detection placement against mechanical or architectural changes?</li>
+            <li class="show-contractor">For your D&amp;C work, do you usually scope wet and dry together or separately?</li>
+            <li>What is your view on EWIS speaker work? Is that a service you take on, or do you sub it out?</li>
+          </ul>
         </div>
 
         <div class="block ask">
@@ -1344,10 +1841,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <div class="block-head"><span class="tag">R</span>Reinforce</div>
           <div class="block-body">
             <ul>
-              <li><strong>One design space, all services, coordinated.</strong></li>
-              <li>The detection workflow you're seeing is what's now in the MVP, built from feedback we got from designers like you.</li>
-              <li>Bundle pricing is meaningful right now while Dry Fire is MVP, most people are taking the bundle.</li>
-              <li class="show-contractor">For contractors who tender on combined wet and dry, this is the workflow that makes you faster than firms still doing detection manually.</li>
+              <li><strong>One design space, all services, coordinated.</strong> Same tools, same compliance engine, same colour code as sprinklers.</li>
+              <li>The detection workflow you are seeing right now is what shipped in the MVP. Built from feedback from designers like you.</li>
+              <li>The 40% discount on Dry Fire is intentional. We know the engine has more coordination to do as services stack, and that is the deal while we close that gap.</li>
+              <li class="show-contractor">For contractors tendering on combined wet and dry, this is the workflow that makes you faster than firms still doing detection manually.</li>
               <li class="show-consultancy">For consultancies that occasionally do detection, this means you can take on dry-fire scope without it dragging out the project.</li>
               <li class="show-solo">Even if dry fire is a side hustle for you, this is enough automation that it stops being a money-loser.</li>
             </ul>
@@ -1391,6 +1888,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           </div>
         </div>
 
+        <div class="processing-questions">
+          <div class="processing-questions-label">Processing Time Questions</div>
+          <p class="processing-questions-tip">The push back to Revit takes a minute or two. Keep them engaged with workflow questions while it lands.</p>
+          <ul>
+            <li>What is your handoff process? Do designers push direct to Revit, or do drafters do all model work?</li>
+            <li>What schedule formats do you typically use? Do you have a firm-wide template?</li>
+            <li>How are you handling pipework today? Manual, or another tool?</li>
+            <li>What is your current setup for sharing models with the architect and mech consultant?</li>
+            <li class="show-contractor">For your tender deliverables, what does the architect or builder typically want to see from you on day one?</li>
+          </ul>
+        </div>
+
         <div class="block ask">
           <div class="block-head"><span class="tag">?</span>Ask</div>
           <div class="block-body">
@@ -1421,19 +1930,24 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       <article class="phase" data-phase="12">
         <div class="phase-eyebrow"><span class="step">12</span> Wrap <span class="mode-badge">~3 min</span></div>
         <h1 class="phase-title">Redesign Workflow</h1>
-        <p class="phase-summary">Mech change? Architect moved a wall? Select the room or group, re-run Tandm just on those. Avoids new obstructions. Margin protected.</p>
+        <p class="phase-summary">A mech change. Architect moved a wall. Select the room or group, re-run Tandm just on those. Avoids new obstructions. Margin protected.</p>
 
         <div class="block tell">
           <div class="block-head"><span class="tag">T</span>Tell</div>
           <div class="block-body">
             <ul>
-              <li>Changes happen on every project. New mech layout, architect moves a wall, ceiling type changes mid-project.</li>
-              <li><strong>Tandm doesn't rebuild the whole floor for a change in one room.</strong> I'll select the room (or group), hit the Fire Designer button.</li>
-              <li>Tandm asks if you want to delete the existing sprinklers, say yes.</li>
-              <li>Then I'll Place Sprinklers. Tandm re-runs <strong>avoiding the new obstruction</strong>.</li>
-              <li>This is also how you experiment with hazard class changes, or test a different design approach on a single room.</li>
-              <li><strong>Workflow caveat.</strong> If you've grouped your sprinklers into a Revit model group (common on typical floors), re-running breaks the group. So I'd suggest using Tandm for the <strong>initial layout</strong> on those, and Revit's normal workflow for subsequent tweaks.</li>
-              <li><strong>Pipework caveat:</strong> if you've connected pipework, re-running deletes the sprinklers, you'd need to reconnect. So re-runs are best for layout changes, not single-sprinkler nudges.</li>
+              <li>The last thing I want to show you is redesign, because redesign is where most time gets lost on real projects.</li>
+              <li>Layouts do not stay fixed. Other disciplines move things. Coordination happens. You are constantly adjusting.</li>
+              <li><strong>This is where Tandm provides one of the biggest time savings.</strong> Let me simulate a change to the model.</li>
+              <li>I'll jump into a room, for example Room 43. Now I'll create a clash, similar to what happens during coordination.</li>
+              <li>I'll copy an air register from the mech model and move it into a position that conflicts with the sprinkler layout.</li>
+              <li>So now we have got a clash with the existing layout. Normally this is where you'd go in and start adjusting sprinklers manually, moving them one by one to work around the change.</li>
+              <li>Instead, I'll select the room and re-run Tandm just on that room.</li>
+              <li>Tandm recognises there is already a layout in place, prompts me to replace it. What it does now is re-read the geometry, pick up the new obstruction, and regenerate the layout based on the updated conditions.</li>
+              <li>So instead of adjusting individual elements, I am recalculating from a clean base. <strong>If this change affected multiple rooms, I could select all of them and re-run Tandm together.</strong></li>
+              <li>This isn't a one-room fix. It scales across the model. This is really where Tandm shifts from being a design tool to being a coordination tool.</li>
+              <li><strong>Workflow caveat.</strong> If you have grouped your sprinklers into a Revit model group (common on typical floors), re-running breaks the group. So use Tandm for the <strong>initial layout</strong> on those, and Revit's normal workflow for subsequent tweaks.</li>
+              <li><strong>Pipework caveat.</strong> If you have connected pipework, re-running deletes the sprinklers, you would need to reconnect. So re-runs are best for layout changes, not single-sprinkler nudges.</li>
             </ul>
           </div>
         </div>
@@ -1441,13 +1955,46 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         <div class="block show">
           <div class="block-head"><span class="tag">S</span>Show</div>
           <div class="block-body">
-            <ul>
-              <li>I'll pick a room from the existing design. I'll drop a diffuser onto an existing sprinkler in the linked mech model.</li>
-              <li>I'll select the room. Click Fire Designer.</li>
-              <li>Tandm prompts to delete existing devices. I'll confirm.</li>
-              <li>I'll hit Place Sprinklers. We watch the new layout avoid the diffuser.</li>
-              <li>I'll hit Export Devices. Done in 30 seconds.</li>
-            </ul>
+            <p style="margin-bottom: 10px;"><strong>Step 1.</strong> Navigate to Room 43. If you cannot see the air registers or fire alarm devices, you need to turn on their visibility first.</p>
+
+            <div class="mouse-moves">
+              <div class="mouse-moves-label">Mouse Moves: Turn on element visibility (if needed)</div>
+              <ol>
+                <li>Type <kbd>V</kbd> <kbd>V</kbd> to open Revit's Visibility / Graphics dialog</li>
+                <li>Scroll to <strong>Fire Alarm Devices</strong> and tick the box to turn them on</li>
+                <li>Do the same for any other category you need visible</li>
+                <li>Click <kbd>OK</kbd> to apply</li>
+              </ol>
+            </div>
+
+            <p style="margin: 14px 0 10px;"><strong>Step 2.</strong> Create the clash by copying an air register over an existing sprinkler.</p>
+
+            <div class="mouse-moves">
+              <div class="mouse-moves-label">Mouse Moves: Copy and place the air register</div>
+              <ol>
+                <li>Left-click the air register to select it</li>
+                <li>Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy</li>
+                <li>Press <kbd>Ctrl</kbd> + <kbd>V</kbd> to paste, Revit attaches the copy to your cursor</li>
+                <li>Click once to drop the copy near the original</li>
+                <li>Drag the copy directly over an existing sprinkler to force a clash</li>
+              </ol>
+            </div>
+
+            <p style="margin: 14px 0 10px;"><strong>Step 3.</strong> Select the room. This is the tricky bit, because your cursor naturally hovers over a detector or sprinkler before it hovers over the room itself.</p>
+
+            <div class="mouse-moves">
+              <div class="mouse-moves-label">Mouse Moves: Select a room using Tab cycling</div>
+              <ol>
+                <li>Hover the cursor over the room area. Revit highlights whatever is under your cursor first, usually a detector or sprinkler. It goes <strong>blue</strong>.</li>
+                <li>Press <kbd>Tab</kbd> to cycle through the elements Revit can select underneath the cursor. Watch the blue highlight change: detector, sprinkler, room.</li>
+                <li>When the <strong>room</strong> is highlighted blue, <strong>left-click</strong> to select it.</li>
+                <li>Click <strong>Fire Designer</strong> in the Tandm ribbon to re-run on that room.</li>
+              </ol>
+            </div>
+
+            <p style="margin: 14px 0 10px;"><strong>Step 4.</strong> Tandm prompts to replace the existing layout. Confirm, and Tandm regenerates avoiding the new clash.</p>
+
+            <p style="margin-bottom: 6px;"><strong>Step 5.</strong> Hit Export Devices to push back to Revit. Done in around 30 seconds.</p>
           </div>
         </div>
 
@@ -1457,7 +2004,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
             <ul>
               <li class="show-contractor">How much time does your team currently lose to redesigns each year? On a busy project, can it run to days?</li>
               <li class="show-consultancy">How much of your typical project budget gets eaten by late changes and redesigns?</li>
-              <li>What's your current process when the architect comes back with changes mid-design?</li>
+              <li>What is your current process when the architect comes back with changes mid-design?</li>
+              <li>How often are you having to coordinate around late mech or electrical changes?</li>
             </ul>
           </div>
         </div>
@@ -1467,7 +2015,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <div class="block-body">
             <ul>
               <li><strong>Redesigns are where margin goes to die.</strong> This is the protection.</li>
-              <li>You've already paid the cost of the first design. Every change after is pure margin erosion, unless you've got something like Tandm doing the re-run for you.</li>
+              <li>You have already paid the cost of the first design. Every change after is pure margin erosion, unless you have got something like Tandm doing the re-run for you.</li>
+              <li>The biggest gain with Tandm is not actually the first layout. It is how quickly you can respond to changes as the project evolves.</li>
               <li class="show-contractor">For D&amp;C work especially, the speed of redesign turnaround is often the difference between a profitable job and a marginal one.</li>
               <li class="show-consultancy">For consultancies, this is the difference between absorbing change orders silently and being able to push back with confidence.</li>
             </ul>
@@ -1562,8 +2111,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <div class="block-body">
             <ul>
               <li>Quick recap on the ROI we ran in the alignment session.</li>
-              <li><strong>The maths:</strong> <span class="placeholder">[X levels × Y sqm × Z hours/level × $rate × N projects/year]</span></li>
-              <li><strong>The outcome:</strong> <span class="placeholder">[days saved]</span> back, <span class="placeholder">[$ saved]</span> on a sub-$5K investment.</li>
+              <li><strong>The maths:</strong> <span class="placeholder" data-fill="roi-maths">[X levels × Y sqm × Z hours/level × $rate × N projects/year]</span></li>
+              <li><strong>The outcome:</strong> <span class="placeholder" data-fill="roi-days">[days saved]</span> back, <span class="placeholder" data-fill="roi-dollars">[$ saved]</span> on a sub-$5K investment.</li>
               <li>And that's only one segment of your portfolio. Tandm isn't going to do every project, but where it lands in the sweet spot, <strong>it kicks like a mule</strong>.</li>
               <li>I'll send you the link to the ROI calculator after this so you can play with your own numbers.</li>
             </ul>
@@ -1632,7 +2181,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <div class="block-body">
             <ul>
               <li>I'll send you a summary today: questions and answers from this session, the ROI calculator link, the offer details, and the recording link.</li>
-              <li>Have a read through with your team and I'll check in next <span class="placeholder">[day]</span>.</li>
+              <li>Have a read through with your team and I'll check in next <span class="placeholder" data-fill="followup-day">[day]</span>.</li>
               <li>Who's the best person for me to follow up with?</li>
               <li>If you've got a current project model you'd like Byron to take a quick look at for Tandm fit, send it through and we'll give you an honest assessment before you commit.</li>
               <li><strong>If the right people weren't on the call:</strong> I can offer a second session focused on Dry Fire for the wider team, or share the recording.</li>
@@ -1692,15 +2241,17 @@ document.querySelectorAll('.proptype button').forEach(btn => {
 // ============== phase navigation ==============
 const phases = Array.from(document.querySelectorAll('.phase'));
 const navItems = Array.from(document.querySelectorAll('.nav-item'));
-let current = 1;
-const total = phases.length;
+let current = 0;
+const phaseNums = phases.map(p => parseInt(p.dataset.phase)).sort((a,b)=>a-b);
+const minPhase = phaseNums[0];
+const maxPhase = phaseNums[phaseNums.length - 1];
 
 function showPhase(n) {
-  current = Math.max(1, Math.min(total, n));
+  current = Math.max(minPhase, Math.min(maxPhase, n));
   phases.forEach(p => p.classList.toggle('active', parseInt(p.dataset.phase) === current));
   navItems.forEach(item => item.classList.toggle('active', parseInt(item.dataset.phase) === current));
-  document.getElementById('prevBtn').disabled = current === 1;
-  document.getElementById('nextBtn').disabled = current === total;
+  document.getElementById('prevBtn').disabled = current === minPhase;
+  document.getElementById('nextBtn').disabled = current === maxPhase;
   document.getElementById('panel').scrollTop = 0;
   renderSidebar(current);
 }
@@ -1713,17 +2264,116 @@ document.getElementById('nextBtn').addEventListener('click', () => showPhase(cur
 
 // keyboard nav
 document.addEventListener('keydown', (e) => {
-  if (e.target.tagName === 'INPUT') return;
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
   if (e.key === 'ArrowRight') showPhase(current + 1);
   if (e.key === 'ArrowLeft') showPhase(current - 1);
 });
 
+// ============== prospect setup (saves to localStorage, fills placeholders) ==============
+const PROSPECT_KEY = 'tandm-demo-prospect-data';
+const PROSPECT_FIELDS = ['prospect', 'designers', 'mix', 'revit', 'manual-time', 'followup-day', 'roi-maths', 'roi-days', 'roi-dollars'];
+
+function loadProspectData() {
+  try {
+    const stored = localStorage.getItem(PROSPECT_KEY);
+    if (!stored) return null;
+    return JSON.parse(stored);
+  } catch(e) { return null; }
+}
+
+function applyProspectData(data) {
+  if (!data) return;
+  PROSPECT_FIELDS.forEach(field => {
+    const value = data[field];
+    const input = document.getElementById('ps-' + field);
+    if (input) input.value = value || '';
+    document.querySelectorAll('[data-fill="' + field + '"]').forEach(el => {
+      if (value && value.trim()) {
+        el.textContent = value;
+        el.classList.add('filled');
+      }
+    });
+  });
+  // Update top bar prospect name field too
+  const topBarName = document.getElementById('prospectName');
+  if (topBarName && data.prospect) topBarName.value = data.prospect;
+}
+
+function saveProspectData() {
+  const data = {};
+  PROSPECT_FIELDS.forEach(field => {
+    const input = document.getElementById('ps-' + field);
+    data[field] = input ? input.value.trim() : '';
+  });
+  try {
+    localStorage.setItem(PROSPECT_KEY, JSON.stringify(data));
+  } catch(e) {}
+  applyProspectData(data);
+  const status = document.getElementById('ps-status');
+  if (status) {
+    status.textContent = 'Saved and applied to all phases';
+    status.classList.add('saved');
+    setTimeout(() => {
+      status.textContent = 'Saved. Edit and save again to update.';
+    }, 2500);
+  }
+}
+
+function clearProspectData() {
+  if (!confirm('Clear all prospect data? This cannot be undone.')) return;
+  try { localStorage.removeItem(PROSPECT_KEY); } catch(e) {}
+  PROSPECT_FIELDS.forEach(field => {
+    const input = document.getElementById('ps-' + field);
+    if (input) input.value = '';
+    document.querySelectorAll('[data-fill="' + field + '"]').forEach(el => {
+      // Reset to original placeholder text
+      const original = el.getAttribute('data-original');
+      if (original) el.textContent = original;
+      el.classList.remove('filled');
+    });
+  });
+  const status = document.getElementById('ps-status');
+  if (status) { status.textContent = 'Cleared. Ready for next prospect.'; status.classList.remove('saved'); }
+}
+
+// Capture original placeholder text on load
+document.querySelectorAll('.placeholder[data-fill]').forEach(el => {
+  el.setAttribute('data-original', el.textContent);
+});
+
+// Wire up buttons
+const saveBtn = document.getElementById('ps-save');
+const clearBtn = document.getElementById('ps-clear');
+if (saveBtn) saveBtn.addEventListener('click', saveProspectData);
+if (clearBtn) clearBtn.addEventListener('click', clearProspectData);
+
+// Sync top bar prospect name with setup field
+const topProspectInput = document.getElementById('prospectName');
+const psProspectInput = document.getElementById('ps-prospect');
+if (topProspectInput && psProspectInput) {
+  topProspectInput.addEventListener('input', () => { psProspectInput.value = topProspectInput.value; });
+}
+
+// Load saved data on startup
+const savedData = loadProspectData();
+if (savedData) {
+  applyProspectData(savedData);
+  const status = document.getElementById('ps-status');
+  if (status) { status.textContent = 'Loaded from previous session'; status.classList.add('saved'); }
+}
+
 // ============== sidebar Q&A library ==============
 const sidebar = {
+  0: [
+    { q: "Why is Revit running slow during my demos?", a: "Most often it's other software hogging the machine. Chrome with lots of tabs open is the worst offender. Close Chrome and any non-essential apps before the demo. If your machine has been running for a long time, restart it. Revit needs the resources." },
+    { q: "What if my machine freezes mid-demo?", a: "Stay calm and talk through what's happening. Ask the prospect about their current projects to fill the silence. If it doesn't recover in 30 seconds, mention the machine demands of Revit, restart if needed, and offer to send a recording. Better than dead air." },
+    { q: "How early should I open Revit before the call?", a: "About 5 minutes. Open the Tandm Hospital model in Revit, but don't run Tandm yet. Just have everything loaded and ready to share. That avoids the first awkward wait being a model load." },
+    { q: "Where does the prospect data I enter go?", a: "Stored locally in your browser only. Nothing is sent anywhere. If you clear browser data, it's gone. The Clear All button resets it for the next demo." }
+  ],
   1: [
     { q: "I haven't seen Tandm in a year, has much changed?", a: "Significantly. The product has evolved a lot in the last twelve months, particularly around design control, splitting, ceiling handling, and the Fire Designer workspace. Dry Fire MVP has also launched." },
     { q: "Who's the typical user, consultant or contractor?", a: "Both. The product is built around fire designers regardless of where they sit. Consultancies use it for fast accurate layouts. Contractors use it for D&C tender response and redesign protection." },
-    { q: "How long does it take to learn?", a: "About a week to get comfortable. Mike came in with no Revit or fire background and was running Tandm within that time. The onboarding includes two live sessions on the prospect's actual projects." },
+    { q: "How long does it take to learn?", a: "About a week to get comfortable. I came in with no Revit or fire design background and was running Tandm within that time. The onboarding includes two live sessions on your team's actual projects." },
     { q: "Is Tandm used in any of the big firms?", a: "Yes, names include Omnii. Recent traction includes some tier-one firms. Since January 2026, more sales than the previous 18 months combined." }
   ],
   2: [
@@ -1766,6 +2416,8 @@ const sidebar = {
   ],
   8: [
     { q: "What's the difference between Ceiling Trace and Wall Trace?", a: "Ceiling Trace handles multiple ceiling heights in one room, breaks them into individual zones and lays out sprinklers per zone. Wall Trace handles architects' models where room bounding was turned off on internal walls (common in apartments)." },
+    { q: "Which colour is the higher ceiling and which is the lower?", a: "When you toggle ceiling-height visibility, the lighter colour is the highest ceiling, the medium colour is in between, and the darkest colour is the lowest. So a darker shade next to a lighter shade is a step down in the ceiling." },
+    { q: "Why doesn't Wall Trace need accurate room data?", a: "It bypasses the Revit room definition entirely and reads the wall geometry directly. The data is all there in the model, Wall Trace just works from the walls themselves rather than the room boundaries Revit has assigned. (Important: don't say the room data is wrong or inaccurate. It just isn't bounded the way you'd expect.)" },
     { q: "What about low-height partitions?", a: "They'll come through as orange walls. The designer's call, leave them, treat as obstructions via splitting, or use Wall Trace if you want them considered as room dividers." },
     { q: "Are beam rules built in?", a: "Yes. Both for light and ordinary hazard, and for upright vs pendant. Built into the placement engine and the Grid Edit tool." }
   ],
@@ -1773,11 +2425,15 @@ const sidebar = {
     { q: "Can I mix hazard classes on one floor?", a: "Yes, every room can have its own hazard class. Change from the panel, re-run, done. You can batch-change groups of rooms too." }
   ],
   10: [
-    { q: "Is Dry Fire ready for production work?", a: "Yes, MVP released April 2026 with compliance checks live. The product is being actively developed but is in production use. There's a 40% launch discount that reflects MVP status." },
+    { q: "Is Dry Fire ready for production work?", a: "Yes, MVP released April 2026 with compliance checks live. The product is in production use, and the 40% launch discount reflects MVP status." },
     { q: "Does it cover heat detectors? Speakers?", a: "Yes to both. All within the same Fire Designer workspace as sprinklers." },
     { q: "What's the air register clearance?", a: "Built in at 900mm minimum. Tandm checks automatically when placing detectors near air registers." },
+    { q: "What spacing does Tandm use for speakers?", a: "There is no standard spacing for speakers. The values Tandm uses are rules of thumb that designers generally apply. It's up to your team to determine what to use per project. You can customise the spacing the same way you customise hazard classifications for sprinklers." },
     { q: "What about SPL levels for speakers?", a: "Currently rule-of-thumb spacing rather than full SPL calculation, because speaker placement is largely discretionary. Performance-based SPL isn't built in." },
+    { q: "Why are there so many clashes on the speaker pass?", a: "It's the engine coordinating three different services at once. That's where we are in the MVP, and it's reflected in the 40% Dry Fire discount. The tools are all there to clean it up quickly, and the engine will close that gap as the product matures." },
     { q: "Do detectors and sprinklers share a workflow?", a: "Yes, same design space, same tools (grid edit, free edit, splitting, align), same colour code. Just different tabs in the Fire Designer." },
+    { q: "How does Tandm handle ductwork in exposed areas?", a: "Tandm flags ducts as obstructions if they obstruct a sprinkler, using the standard obstruction rule. Depending on duct size, Tandm will place sprinklers beneath certain ducts, this can be toggled on or off as it's a generic placement. You can't modify the under-duct placement until they're in the Revit model. For complex exposed areas, you may still need to manually review." },
+    { q: "What about sidewall sprinklers?", a: "Tandm doesn't do sidewall sprinklers. Overhead sprinklers only." },
     { q: "Can I show detection and sprinklers on separate sheets in Revit?", a: "Yes, they're all native Revit families. Control visibility per sheet to show detection on one RCP and sprinklers on another." }
   ],
   11: [
@@ -1786,8 +2442,11 @@ const sidebar = {
     { q: "What about Hyena calcs integration?", a: "Not directly integrated yet. Hyena is the sister company, integration is on the roadmap, likely alongside pipework automation when it lands." }
   ],
   12: [
+    { q: "I can't see the fire alarm devices, where are they?", a: "Their visibility category is likely turned off. In Revit, type VV (Visibility / Graphics shortcut), scroll to Fire Alarm Devices, tick the box to turn them on, click OK. Same trick for any other category you can't see." },
+    { q: "I'm trying to select a room and I keep grabbing a detector or sprinkler. How do I select the room?", a: "Hover over the room area until something goes blue. That's whatever is closest to your cursor, usually a detector. Press Tab to cycle through what Revit can select underneath, watch the blue highlight change. When the room highlights, left-click to select it." },
     { q: "What if I've grouped my sprinklers as a Revit model group?", a: "Re-running breaks the group because Tandm deletes and re-places. For typical floors with groups, use Tandm for the initial layout only, then Revit's normal workflow for changes." },
     { q: "Will Tandm respect existing pipework connections?", a: "No, re-running deletes the sprinklers, you'd reconnect to pipework afterward. So re-runs are best for layout changes, not minor sprinkler nudges. Move single sprinklers manually in Revit." },
+    { q: "Can I rerun across multiple rooms at once?", a: "Yes. Select all the affected rooms (Tab-cycle or Ctrl-click) and run Tandm on the selection. That's how you handle changes that ripple across a floor." },
     { q: "Can I bring an existing design back into Tandm to check compliance?", a: "Not yet. Currently the workflow is rerun rather than retrofit. Existing-design compliance checking is on the roadmap." }
   ],
   13: [
@@ -1815,15 +2474,44 @@ function renderSidebar(phaseNum) {
     list.innerHTML = '<div class="skel">No common questions logged yet for this phase.</div>';
     return;
   }
+
+  // Action bar (Expand All / Collapse All)
+  if (items.length > 2) {
+    const actions = document.createElement('div');
+    actions.className = 'aside-actions';
+    actions.innerHTML = '<button data-act="expand">Expand all</button><button data-act="collapse">Collapse all</button>';
+    actions.querySelector('[data-act="expand"]').addEventListener('click', () => {
+      list.querySelectorAll('.qa').forEach(q => q.classList.add('open'));
+    });
+    actions.querySelector('[data-act="collapse"]').addEventListener('click', () => {
+      list.querySelectorAll('.qa').forEach(q => q.classList.remove('open'));
+    });
+    list.appendChild(actions);
+  }
+
   items.forEach(item => {
     const wrap = document.createElement('div');
     wrap.className = 'qa';
-    wrap.innerHTML = `<div class="qa-q">${item.q}</div><div class="qa-a">${item.a}</div>`;
+    const qEl = document.createElement('div');
+    qEl.className = 'qa-q';
+    qEl.textContent = item.q;
+    const aEl = document.createElement('div');
+    aEl.className = 'qa-a';
+    aEl.textContent = item.a;
+    wrap.appendChild(qEl);
+    wrap.appendChild(aEl);
+    qEl.addEventListener('click', () => {
+      const wasOpen = wrap.classList.contains('open');
+      // Close all others
+      list.querySelectorAll('.qa').forEach(q => q.classList.remove('open'));
+      // If this one wasn't already open, open it. (Clicking an open one closes it.)
+      if (!wasOpen) wrap.classList.add('open');
+    });
     list.appendChild(wrap);
   });
 }
 
-renderSidebar(1);
+renderSidebar(0);
 </script>
 </body>
 </html>
