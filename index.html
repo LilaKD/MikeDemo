@@ -1182,7 +1182,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
       <div class="nav-section-title">The Magic</div>
       <ol start="5">
-        <li class="nav-item" data-phase="5"><span class="num">05</span><span class="lbl">First Layout &amp; Colour Code</span></li>
+        <li class="nav-item" data-phase="5"><span class="num">05</span><span class="lbl">Tandm Fire Designer &amp; First Layout</span></li>
         <li class="nav-item" data-phase="6"><span class="num">06</span><span class="lbl">Grid Edit &amp; Free Edit</span></li>
         <li class="nav-item" data-phase="7"><span class="num">07</span><span class="lbl">Splitting &amp; Complex Rooms</span></li>
         <li class="nav-item" data-phase="8"><span class="num">08</span><span class="lbl">Orange Walls</span></li>
@@ -1226,8 +1226,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
                 <li><input type="checkbox" id="prep3"><label for="prep3" class="prep-label"><strong>Open the Tandm Hospital model in Revit</strong>, ready to share when the call starts.</label></li>
                 <li><input type="checkbox" id="prep4"><label for="prep4" class="prep-label"><strong>Mute notifications</strong>. Close Slack, Teams notifications, anything that might pop up over the screen share.</label></li>
                 <li><input type="checkbox" id="prep5"><label for="prep5" class="prep-label"><strong>Confirm your screen share works</strong> as soon as the call connects. Test it before opening the model.</label></li>
-                <li><input type="checkbox" id="prep6"><label for="prep6" class="prep-label"><strong>Have this companion open on a second screen</strong> or in a window beside the demo.</label></li>
-                <li><input type="checkbox" id="prep7"><label for="prep7" class="prep-label"><strong>Have your follow-up summary template ready to fire after the call</strong>. Aim to send within 24 hours while the demo is fresh.</label></li>
               </ul>
             </div>
           </div>
@@ -1310,16 +1308,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         <p class="phase-summary">Open warmly, recap the alignment session, set expectations, and confirm who's in the room.</p>
 
         <ul class="flow">
-          <li>Thanks so much for jumping on, <span class="placeholder" data-fill="prospect">[team at firm]</span>. I really appreciate the time, especially given how busy you all are.</li>
+          <li>Hi everyone, I'm Mike, Head of Customer Success at Tandm. Thanks for jumping on, I really appreciate your time.</li>
+
+          <li class="ask"><span class="pill">Ask</span>Hello <span class="placeholder" data-fill="prospect">[name]</span>, can you please introduce your team briefly so we know who's who on this call?</li>
+
           <li>Just a quick recap from our alignment session a couple of weeks back. You've got <span class="placeholder" data-fill="designers">[X designers]</span>, your portfolio leans <span class="placeholder" data-fill="mix">[mix]</span>, and you're running about <span class="placeholder" data-fill="revit">[Y%]</span> Revit.</li>
-          <li>I'm Mike, Head of Customer Success at Tandm.</li>
-          <li>Upfront, I'm not a fire designer. I came in with no Revit or fire design background and got comfortable with Tandm in about a week, which says something about how the tool's been built.</li>
-          <li>Anything technical I can't answer, I'll note down and come straight back to you, or loop in Byron, our product expert who built this.</li>
-          <li>Today's plan is about thirty minutes walking through the platform. The more you ask, the more you'll get out of it, so please jump in any time.</li>
+          <li>Just to let everyone know, I'm not a fire designer. I came in with no Revit or fire design background and was able to use Tandm within about a week, which says a lot about how user-friendly the tool is.</li>
+          <li>Anything that's too technical I can't answer, I'll note down and come straight back to you, or I'll loop in Byron, who is our product expert.</li>
+          <li>Today's plan is to show you how Tandm works. And actually, the more questions you ask, the more you'll get out of it, so please feel free to jump in any time.</li>
 
           <li class="show"><span class="pill">Show</span>Share screen with the Tandm Hospital model open in Revit. Confirm visibility before continuing.</li>
 
-          <li class="ask"><span class="pill">Ask</span>Could each of you quickly introduce yourselves, names and roles?</li>
           <li class="ask show-consultancy"><span class="pill">Ask</span>My calibration question: "Where in the design lifecycle do you typically come in? Designing from scratch, or working off architects' or upstream models?"</li>
           <li class="ask show-contractor"><span class="pill">Ask</span>My calibration question: "Are you typically taking layouts from consultants and adapting, or doing the design yourselves from scratch?"</li>
           <li class="ask show-solo"><span class="pill">Ask</span>My calibration question: "How much of your work is fresh greenfield design versus adapting existing layouts?"</li>
@@ -1347,9 +1346,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <li class="show"><span class="pill">Show</span>Have the model open in Revit on the ground floor view. Zoom in briefly to show the scale and complexity, rooms, corridors, services in linked models. Don't run anything yet.</li>
 
           <li>One thing I want to flag early. <strong>Tandm is a Revit add-in and needs a native Revit model to run properly.</strong></li>
-          <li>It reads Revit rooms to understand the geometry and place sprinklers. If the model's been converted from another format or has mapping issues, that's where things break down, so model quality matters.</li>
+          <li>It reads Revit rooms to understand the geometry and place sprinklers. If the model's been converted from another format or has mapping issues, model quality matters.</li>
           <li>What I'm showing you today is where Tandm is right now. It's evolving fast, with new versions coming through regularly.</li>
-          <li>Automation handles the bulk of the work, but designers stay in control of the design.</li>
 
           <li class="ask"><span class="pill">Ask</span><strong>My anchor question:</strong> "Just to gauge things, how long would it take you to place those 1,000 sprinklers on a floor plate this size, manually?"</li>
           <li class="ask"><span class="pill">Ask</span>I'm expecting 2 to 5 days. From alignment, they said <span class="placeholder" data-fill="manual-time">[manual time]</span>. I'll confirm that number is still in their head.</li>
@@ -1370,30 +1368,38 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       <article class="phase" data-phase="3">
         <div class="phase-eyebrow"><span class="step">03</span> Setup <span class="mode-badge">~4 min</span></div>
         <h1 class="phase-title">Settings Tour</h1>
-        <p class="phase-summary">Standards, tile positions, soffit offsets, families, custom hazard classes for both wet and dry fire. Set up once per project.</p>
+        <p class="phase-summary">Standards, tile positions, general settings, sprinkler families, design standards, and the dry fire equivalents. Set up once per project.</p>
 
         <ul class="flow">
-          <li>Before I run Tandm, there are a few settings to set up. You only do this once per project.</li>
+          <li>Before I run Tandm, I'll run you through the settings first. You only need to do this once per project.</li>
 
-          <li class="show"><span class="pill">Show</span>Click Settings in the Tandm ribbon. Walk through each tab: Standards, Tile Positions, Sprinkler Placement, Families, Design Standards, Smoke Detectors, Speakers.</li>
+          <li class="show"><span class="pill">Show</span>Click Settings in the Tandm ribbon. Walk through each tab: Standards, Tile Positions, General Settings, Sprinkler Families, Design Standards, then the dry fire equivalents (Smoke Detectors, Speakers).</li>
 
-          <li><strong>Standards.</strong> Tandm ships with AS 2118, NFPA 13, and British Standards. You can work in metric or imperial.</li>
-          <li><strong>Tile positions.</strong> You can tell Tandm which positions on a tile are valid for placement. Most of the time, I'd leave everything on. If you physically can't place in the corners of a square tile, you deactivate those positions.</li>
-          <li><strong>Custom tile sizes.</strong> If the architect uses a non-standard tile size, you add it here so Tandm can match it.</li>
-          <li><strong>Soffit offset for exposed areas.</strong> This sets how far off the soffit your sprinklers sit. We've defaulted to the standard maximum, 300mm for combustible, 450mm for non-combustible. You can adjust if you want to lift them to align with your range pipework.</li>
-          <li><strong>Sprinkler families.</strong> We ship with Tandm families and some Victaulic families because of our partnership. I always recommend you use your own families. Load them into Revit like normal, and as long as they're unhosted, they appear in this list.</li>
-          <li><strong>Custom hazard classifications.</strong> Need different spacings for extended coverage, residential, flush, semi-recessed? Create a new class based on an existing one, edit any field. You can map different families to different classes.</li>
+          <li><strong>Standards.</strong> Tandm ships with the three main standards used worldwide.
+            <ul>
+              <li>Australian, the <strong>AS standards (AS 2118)</strong>.</li>
+              <li>US, the <strong>NFPA standards</strong>.</li>
+              <li>UK, the <strong>BS EN standards</strong>.</li>
+              <li>You can also work in metric or imperial depending on the project.</li>
+            </ul>
+          </li>
+
+          <li><strong>Tile positions.</strong> This is where you tell Tandm which positions on a tile are valid for sprinkler placement.</li>
+          <li>By default we ship with the standard tile positions activated, the centre, mid-points and corners. Most of the time I'd leave them all on, that gives Tandm the most flexibility when it's placing.</li>
+          <li>If for some reason you can't physically place sprinklers in the corners of a square tile, maybe the corners are reserved for lights or air registers in your firm's standard, you can deactivate those positions here. Tandm will respect that and only place where you've told it it's allowed.</li>
+          <li><strong>Custom tile sizes.</strong> Same section. If the architect on a specific project is using a non-standard tile size, say a long rectangular tile or a custom dimension, you add it here so Tandm can match the layout to it.</li>
+
+          <li><strong>General Settings (Soffit Offset for Exposed Areas).</strong> This sets how far off the soffit your sprinklers sit in exposed ceiling areas. We've defaulted to the standard maximum, 300mm for combustible and 450mm for non-combustible. You can adjust if you want to lift them to align with your range pipework.</li>
+
+          <li><strong>Sprinkler Families.</strong> We ship with Tandm families and some Victaulic families because of our partnership. I always recommend you use your own families. Load them into Revit like normal, and as long as they're unhosted, they appear in this list ready to map.</li>
+
+          <li><strong>Design Standards (Custom Hazard Classifications).</strong> If you need different spacings for extended coverage, residential, flush, or semi-recessed heads, you create a new class here based on an existing one and edit any field. You can map different families to different classes.</li>
 
           <li class="show"><span class="pill">Show</span>Create a custom hazard class as a demo. "Test light" based on light hazard, change one value, hit Apply. Show it appears in the families list ready to map.</li>
 
-          <li>Now for the dry fire side. Same pattern, separate tabs.</li>
-          <li><strong>Smoke detector settings.</strong> Coverage spacings per class, the 900mm air register clearance is built in, and you can load your own detector families the same way as sprinklers.</li>
-          <li><strong>Speaker settings.</strong> There's no formal standard spacing for speakers, so what you'll see here is rule of thumb. You can adjust it to whatever your firm typically applies.</li>
-          <li><strong>Custom detector and speaker hazard classes.</strong> Works the same as sprinklers, build classes on top of the defaults.</li>
+          <li class="note"><span class="pill">Tip</span><strong>Dry fire settings section being rebuilt with Byron's dialogue.</strong> For now: same pattern as sprinklers, separate tabs for Smoke Detectors and Speakers, each with their own settings and families. Mention briefly and move on. Full script coming once we capture Byron's wording.</li>
 
-          <li class="show"><span class="pill">Show</span>Click into Smoke Detectors briefly. "Same pattern as sprinklers, we'll come back to this when we layer detectors on."</li>
-
-          <li class="ask"><span class="pill">Ask</span>Are you mostly working to AS 2118, or do you also do projects under NFPA or British standards?</li>
+          <li class="ask"><span class="pill">Ask</span>Are you mostly working to AS 2118, or do you also do projects under NFPA or BS EN standards?</li>
           <li class="ask"><span class="pill">Ask</span>Do you have your own sprinkler families you'd want to load in, or are you happy to start with what we ship?</li>
           <li class="ask show-contractor"><span class="pill">Ask</span>Do you tend to use flush heads in certain areas? We can set up a flush classification just for those rooms.</li>
 
@@ -1435,30 +1441,48 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <li class="reinforce"><span class="pill">Reinforce</span>This honesty is intentional. We'd rather you trust what Tandm does brilliantly than oversell it.</li>
         </ul>
 
-        <div class="scroll-hint">Next: Run the engine and see the magic happen</div>
+        <div class="scroll-hint">Next: Open the Tandm Fire Designer and run the first layout</div>
       </article>
 
       <!-- ============================================== -->
-      <!-- PHASE 5, First Layout & Colour Code            -->
+      <!-- PHASE 5, Tandm Fire Designer & First Layout    -->
       <!-- ============================================== -->
       <article class="phase" data-phase="5">
         <div class="phase-eyebrow"><span class="step">05</span> The Magic <span class="mode-badge">~6 min</span></div>
-        <h1 class="phase-title">First Layout &amp; Colour Code</h1>
-        <p class="phase-summary">Open the design workspace, run the engine, fill the wait, walk through the colour code, anchor the value.</p>
+        <h1 class="phase-title">Tandm Fire Designer &amp; First Layout</h1>
+        <p class="phase-summary">Open the Advanced Design Tool, narrate the load, run the engine on Place Sprinklers, fill the wait with targeted questions, walk through the colour code, anchor the value.</p>
 
         <ul class="flow">
           <li>Now that we've got the settings configured and the rooms created, this is where the real work happens.</li>
-          <li>I'll click <strong>Tandm Fire Designer</strong> in the ribbon. That's the single entry point to what we call the Advanced Design Tool, our design workspace.</li>
-          <li class="show"><span class="pill">Show</span>Click Tandm Fire Designer in the ribbon (Tandm tab). The workspace begins loading. This is where the lag sits, between two and three minutes for a floor this size.</li>
+          <li>I'll click <strong>Tandm Fire Designer</strong> in the ribbon. That's the single entry point to what we call the Advanced Design Tool, our <strong>separate design workspace</strong>.</li>
 
-          <li class="note"><span class="pill">Tip</span>Tandm Fire Designer takes between two and three minutes to load. Don't go silent. Use the questions below to keep the conversation moving.</li>
+          <li class="show"><span class="pill">Show</span>Click Tandm Fire Designer in the ribbon (Tandm tab). The workspace begins loading. This is where the lag sits, between one minute forty-five and three minutes for a floor this size.</li>
+
+          <li class="note"><span class="pill">Tip</span>Tandm Fire Designer takes between one minute forty-five and three minutes to load. Use the talking points below to narrate what's happening, then move to the questions once it's loaded.</li>
+
+          <li>While that's loading, let me walk you through what's actually happening behind the scenes.</li>
+          <li>Tandm is reading the room geometry we just created, pulling in the architectural model, the mech model, the electrical model, anything that's linked in.</li>
+          <li>It's building a model of every obstruction it can see, mech ducts, lighting, electrical, structure, everything that affects where a sprinkler can or can't go.</li>
+          <li>And it's loading the settings we just walked through, the standards you're working to, the tile positions, your sprinkler families, the hazard classifications. Everything is being prepared so that when we hit Place Sprinklers in a minute, the engine has the full picture.</li>
+          <li>One thing worth flagging while we wait. You can run Tandm across a whole floor like I'm about to do, or you can run it on just a room or a group of rooms. For typical apartments or typical rooms, I'd run it on one and copy across.</li>
+
+          <li>OK, the workspace has finished loading. Now I'll hit <strong>Place Sprinklers</strong> inside the workspace.</li>
+
+          <li class="show"><span class="pill">Show</span>Click Place Sprinklers. The engine runs and places the layout.</li>
+
+          <li class="reinforce"><span class="pill">Reinforce</span><em>(Pick up their workflow answer from later in the wait and reflect it back if you can.)</em> Based on what you've described, you'll see Tandm fits naturally into that approach. You can use Tandm just the way you like to work. <strong>Don't change the way you design.</strong></li>
+
+          <li>While this runs, the engine is placing <strong>rows and columns</strong> of sprinklers across every room, equally spaced apart, equally away from walls.</li>
+          <li>It's <strong>avoiding obstructions</strong> it found in those linked models, mech ducts, lighting, electrical, and trying to hit the tile positions we set, balancing all the compliance requirements at once.</li>
+
+          <li class="note"><span class="pill">Tip</span>Place Sprinklers takes another minute or so. Use the questions below now, you'll have richer answers because they've seen Tandm load and they're curious.</li>
         </ul>
 
         <div class="processing-questions">
-          <div class="processing-questions-label">Processing Time Questions (2 to 3 minutes to fill)</div>
+          <div class="processing-questions-label">Processing Time Questions (use while Place Sprinklers runs)</div>
           <p class="processing-questions-tip">Open with the invitation, then pick two or three of the targeted questions. They're all on-topic to what Tandm is doing right now: the engine is making compliance decisions in real time, the designer's habits and pain points are what'll matter most. Take notes, you'll use what they say in the close.</p>
           <ul>
-            <li><strong>Open invitation.</strong> "Has anyone got any questions while Tandm does this? It takes a couple of minutes."</li>
+            <li><strong>Open invitation.</strong> "Has anyone got any questions while Tandm does this? It takes another minute or so."</li>
             <li>How do you and your team prefer to design? Floor by floor, room by room, or by zones?</li>
             <li>What's your typical workflow when starting a fresh fire design from a Revit model? Where do you usually begin?</li>
             <li>When you're placing sprinklers manually, what's the part that eats the most time? The spacing decisions, the obstruction checks, or the compliance verification?</li>
@@ -1471,21 +1495,45 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         </div>
 
         <ul class="flow">
-          <li>OK, the workspace has finished loading. Now I'll hit <strong>Place Sprinklers</strong> inside the workspace.</li>
-          <li class="show"><span class="pill">Show</span>Click Place Sprinklers. The engine runs and places the layout.</li>
-
-          <li class="reinforce"><span class="pill">Reinforce</span><em>(Pick up their workflow answer from the wait and reflect it back.)</em> Based on what you've just described, you'll see Tandm fits naturally into that approach. You can use Tandm just the way you like to work. <strong>Don't change the way you design.</strong></li>
-
-          <li>While that runs, let me walk you through what's actually happening behind the scenes.</li>
-          <li>Tandm's engine is placing <strong>rows and columns</strong> of sprinklers across every room, equally spaced apart, equally away from walls.</li>
-          <li>It's <strong>avoiding obstructions</strong> it finds in linked models, like mech ducts, lighting and electrical.</li>
-          <li>And it's trying to hit the <strong>tile positions</strong> we set in Settings, balancing all the compliance requirements at once.</li>
-          <li>One thing worth flagging: you can run Tandm across a whole floor like I'm doing here, or on just a room or a group of rooms. For typical apartments or typical rooms, I'd run it on one and copy across.</li>
           <li>OK, the layout has finished placing. Let me walk you through what you're looking at.</li>
           <li>The colour code tells you exactly what Tandm thinks of every sprinkler at a glance.</li>
 
           <li class="show"><span class="pill">Show</span>Walk through the colour legend on screen.</li>
         </ul>
+
+        <div class="legend-row" style="margin: 14px 0;">
+          <span class="legend-chip"><span class="dot dot-blue"></span> Valid sprinkler, compliant position</span>
+          <span class="legend-chip"><span class="dot dot-light-green"></span> Coverage from that sprinkler</span>
+          <span class="legend-chip"><span class="dot dot-dark-green"></span> Coverage overlap between sprinklers</span>
+          <span class="legend-chip"><span class="dot dot-orange"></span> Invalid, needs attention</span>
+          <span class="legend-chip"><span class="dot dot-red"></span> Out of rule</span>
+          <span class="legend-chip"><span class="dot-orange-wall"></span> Orange wall, flag for designer</span>
+        </div>
+
+        <ul class="flow">
+          <li><strong>Blue</strong> means valid sprinkler in a compliant position. The bulk of your layout should be blue.</li>
+          <li>The <strong>green</strong> circles around each sprinkler show the coverage. Light green is the coverage area, dark green is where coverage overlaps between sprinklers. So you can visually see where you have double coverage versus single.</li>
+          <li><strong>Orange sprinklers</strong> need your attention. They're flagged because something is wrong: an obstruction, no valid tile position, sprinkler too close to a wall, something like that. Click the orange sprinkler and the left panel tells you why.</li>
+          <li><strong>Red</strong> means the sprinkler is out of rule. It's not compliant where it sits.</li>
+          <li><strong>Orange walls</strong> are flagged for designer review. There are two reasons that happens, we'll cover those in a few minutes.</li>
+
+          <li class="show"><span class="pill">Show</span>Click an orange sprinkler. Point at the left panel showing the reason it's flagged.</li>
+          <li class="show"><span class="pill">Show</span>Click a room. Purple outline shows it's selected.</li>
+          <li class="show"><span class="pill">Show</span>Click an element (light, air register). Right-click to cycle through overlapping elements.</li>
+
+          <li class="ask"><span class="pill">Ask</span>What's your reaction to that initial pass?</li>
+          <li class="ask"><span class="pill">Ask</span>Are there areas where you'd want it tighter or looser than what Tandm's given you?</li>
+
+          <li class="reinforce"><span class="pill">Reinforce</span>What just happened in three minutes is what would normally take your team <strong>several hours</strong> of placing, checking and recalculating.</li>
+          <li class="reinforce"><span class="pill">Reinforce</span>That's the <strong>80% automation</strong>. Now we look at the rooms Tandm has flagged, and that's where you finalise the design with the editing tools.</li>
+          <li class="reinforce"><span class="pill">Reinforce</span>Tandm only adds sprinklers when it can't hit all the compliance requirements with fewer. So most of the time, the layout you're seeing is close to what your designer would have placed manually, except you've just got it in three minutes instead of three days.</li>
+          <li class="reinforce show-contractor"><span class="pill">Reinforce</span>This is where <strong>tender response time</strong> shifts. You can have a coordinated layout to discuss with the architect on day one, not day five.</li>
+          <li class="reinforce show-consultancy"><span class="pill">Reinforce</span>This is where <strong>your designers get back to designing</strong> rather than plotting.</li>
+          <li class="reinforce show-solo"><span class="pill">Reinforce</span>For a solo operator, this is the difference between taking on the job or turning it down.</li>
+        </ul>
+
+        <div class="scroll-hint">Next: The editing tools, Grid Edit and Free Edit</div>
+      </article>
 
         <div class="legend-row" style="margin: 14px 0;">
           <span class="legend-chip"><span class="dot dot-blue"></span> Valid sprinkler, compliant position</span>
