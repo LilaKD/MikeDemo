@@ -1198,8 +1198,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       <ol start="11">
         <li class="nav-item" data-phase="11"><span class="num">11</span><span class="lbl">Push to Revit</span></li>
         <li class="nav-item" data-phase="12"><span class="num">12</span><span class="lbl">Redesign Workflow</span></li>
-        <li class="nav-item" data-phase="13"><span class="num">13</span><span class="lbl">Limitations</span></li>
-        <li class="nav-item" data-phase="14"><span class="num">14</span><span class="lbl">ROI &amp; Close</span></li>
+        <li class="nav-item" data-phase="13"><span class="num">13</span><span class="lbl">Close</span></li>
       </ol>
     </nav>
 
@@ -1318,15 +1317,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <li>Today's plan is to show you how Tandm works. And actually, the more questions you ask, the more you'll get out of it, so please feel free to jump in any time.</li>
 
           <li class="show"><span class="pill">Show</span>Share screen with the Tandm Hospital model open in Revit. Confirm visibility before continuing.</li>
-
-          <li class="ask show-consultancy"><span class="pill">Ask</span>My calibration question: "Where in the design lifecycle do you typically come in? Designing from scratch, or working off architects' or upstream models?"</li>
-          <li class="ask show-contractor"><span class="pill">Ask</span>My calibration question: "Are you typically taking layouts from consultants and adapting, or doing the design yourselves from scratch?"</li>
-          <li class="ask show-solo"><span class="pill">Ask</span>My calibration question: "How much of your work is fresh greenfield design versus adapting existing layouts?"</li>
-          <li class="ask"><span class="pill">Ask</span>If they last saw Tandm a while ago, ask when. Then say: "The product has moved on significantly in twelve months."</li>
-
-          <li class="reinforce show-consultancy"><span class="pill">Reinforce</span>We've focused the last twelve months on making Tandm a real design tool for fire designers, not just a layout plotter. You'll see that in the level of control you have. Tandm does the heavy lifting, your designers stay in charge of the design.</li>
-          <li class="reinforce show-contractor"><span class="pill">Reinforce</span>We've focused the last twelve months on making Tandm a real design tool, not just a layout plotter. It's been useful for D&amp;C tendering, getting compliant layouts out fast, but it's also a serious design and coordination tool.</li>
-          <li class="reinforce show-solo"><span class="pill">Reinforce</span>We've focused the last twelve months on making Tandm work for designers across the spectrum, from solo subbies through to multi-disciplinary firms. It's not going to replace your judgement, it just compresses the boring parts.</li>
         </ul>
 
         <div class="scroll-hint">Next: Set the scene with the Tandm Hospital model</div>
@@ -1351,12 +1341,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
           <li class="ask"><span class="pill">Ask</span><strong>My anchor question:</strong> "Just to gauge things, how long would it take you to place those 1,000 sprinklers on a floor plate this size, manually?"</li>
           <li class="ask"><span class="pill">Ask</span>I'm expecting 2 to 5 days. From alignment, they said <span class="placeholder" data-fill="manual-time">[manual time]</span>. I'll confirm that number is still in their head.</li>
+
           <li class="show"><span class="pill">Show</span>Write the number down on a sticky note. Come back to it at the close.</li>
 
-          <li class="reinforce"><span class="pill">Reinforce</span>Great, hold that number in your head. By the end of this demo, you'll see Tandm do this in under an hour, with a designer cleaning up at the end.</li>
-          <li class="reinforce show-contractor"><span class="pill">Reinforce</span>That time saving lands straight on tender turnaround and redesign margin.</li>
-          <li class="reinforce show-consultancy"><span class="pill">Reinforce</span>That time goes straight back to higher-value design work, or more projects through the door.</li>
-          <li class="reinforce show-solo"><span class="pill">Reinforce</span>For a solo operator, that's the difference between taking on a new job or turning it down.</li>
+          <li class="reinforce show-consultancy"><span class="pill">Reinforce</span>Great, hold that number in your head. By the end of this demo, you'll see Tandm do this in under an hour, and that time goes straight back to higher-value design work or more projects through the door.</li>
+          <li class="reinforce show-contractor"><span class="pill">Reinforce</span>Great, hold that number in your head. By the end of this demo, you'll see Tandm do this in under an hour, and that time saving lands straight on tender turnaround and redesign margin.</li>
+          <li class="reinforce show-solo"><span class="pill">Reinforce</span>Great, hold that number in your head. By the end of this demo, you'll see Tandm do this in under an hour, and for a solo operator that's the difference between taking on a new job or turning it down.</li>
         </ul>
 
         <div class="scroll-hint">Next: Walk through the settings before running anything</div>
@@ -1384,6 +1374,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
             </ul>
           </li>
 
+          <li class="ask"><span class="pill">Ask</span>Are you mostly working to AS 2118, or do you also do projects under NFPA or BS EN standards?</li>
+
           <li><strong>Tile positions.</strong> This is where you tell Tandm which positions on a tile are valid for sprinkler placement.</li>
           <li>By default we ship with the standard tile positions activated, the centre, mid-points and corners. Most of the time I'd leave them all on, that gives Tandm the most flexibility when it's placing.</li>
           <li>If for some reason you can't physically place sprinklers in the corners of a square tile, maybe the corners are reserved for lights or air registers in your firm's standard, you can deactivate those positions here. Tandm will respect that and only place where you've told it it's allowed.</li>
@@ -1393,18 +1385,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
           <li><strong>Sprinkler Families.</strong> We ship with Tandm families and some Victaulic families because of our partnership. I always recommend you use your own families. Load them into Revit like normal, and as long as they're unhosted, they appear in this list ready to map.</li>
 
+          <li class="ask"><span class="pill">Ask</span>Do you have your own sprinkler families you'd want to load in, or are you happy to start with what we ship?</li>
+
           <li><strong>Design Standards (Custom Hazard Classifications).</strong> If you need different spacings for extended coverage, residential, flush, or semi-recessed heads, you create a new class here based on an existing one and edit any field. You can map different families to different classes.</li>
 
-          <li class="show"><span class="pill">Show</span>Create a custom hazard class as a demo. "Test light" based on light hazard, change one value, hit Apply. Show it appears in the families list ready to map.</li>
+          <li class="show"><span class="pill">Show</span>Create a custom hazard class as a demo. "Custom light" based on light hazard, change one value, hit Apply. Show it appears in the families list ready to map.</li>
+
+          <li class="ask show-contractor"><span class="pill">Ask</span>Do you tend to use flush heads in certain areas? We can set up a flush classification just for those rooms.</li>
 
           <li class="note"><span class="pill">Tip</span><strong>Dry fire settings section being rebuilt with Byron's dialogue.</strong> For now: same pattern as sprinklers, separate tabs for Smoke Detectors and Speakers, each with their own settings and families. Mention briefly and move on. Full script coming once we capture Byron's wording.</li>
 
-          <li class="ask"><span class="pill">Ask</span>Are you mostly working to AS 2118, or do you also do projects under NFPA or BS EN standards?</li>
-          <li class="ask"><span class="pill">Ask</span>Do you have your own sprinkler families you'd want to load in, or are you happy to start with what we ship?</li>
-          <li class="ask show-contractor"><span class="pill">Ask</span>Do you tend to use flush heads in certain areas? We can set up a flush classification just for those rooms.</li>
-
           <li class="reinforce"><span class="pill">Reinforce</span>Set this up once, and every project after that is built around <strong>your firm's standards</strong>. Your families, your annotation, your spacings, for both wet and dry fire.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>This is what we mean by Tandm being a real design tool. You don't bend to the software, the software bends to you.</li>
           <li class="reinforce show-contractor"><span class="pill">Reinforce</span>For D&amp;C work, this means every tender response is consistent with how your designers actually deliver.</li>
         </ul>
 
@@ -1433,12 +1424,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
           <li>This is the first model-quality gauge. If rooms are missing or blank, the architect's model has gaps in those areas.</li>
 
-          <li class="ask"><span class="pill">Ask</span>Does your team currently rely on architects' rooms, or do you build your own?</li>
-          <li class="ask"><span class="pill">Ask</span>How clean are the architectural models you usually get to work with?</li>
-
           <li class="reinforce"><span class="pill">Reinforce</span>This is the moment you gauge how good the architect's model is.</li>
           <li class="reinforce"><span class="pill">Reinforce</span><strong>Tandm aims for 80% automation across 80% of rooms.</strong> Perfect models don't exist, every architect's model has imperfections. The 20% Tandm can't process, you finish manually, the same way you would today, just on a much smaller patch.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>This honesty is intentional. We'd rather you trust what Tandm does brilliantly than oversell it.</li>
         </ul>
 
         <div class="scroll-hint">Next: Open the Tandm Fire Designer and run the first layout</div>
@@ -1456,9 +1443,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <li>Now that we've got the settings configured and the rooms created, this is where the real work happens.</li>
           <li>I'll click <strong>Tandm Fire Designer</strong> in the ribbon. That's the single entry point to what we call the Advanced Design Tool, our <strong>separate design workspace</strong>.</li>
 
-          <li class="show"><span class="pill">Show</span>Click Tandm Fire Designer in the ribbon (Tandm tab). The workspace begins loading. This is where the lag sits, between one minute forty-five and three minutes for a floor this size.</li>
-
-          <li class="note"><span class="pill">Tip</span>Tandm Fire Designer takes between one minute forty-five and three minutes to load. Use the talking points below to narrate what's happening, then move to the questions once it's loaded.</li>
+          <li class="show"><span class="pill">Show</span>Click Tandm Fire Designer in the ribbon (Tandm tab). The workspace begins loading.</li>
 
           <li>While that's loading, let me walk you through what's actually happening behind the scenes.</li>
           <li>Tandm is reading the room geometry we just created, pulling in the architectural model, the mech model, the electrical model, anything that's linked in.</li>
@@ -1470,27 +1455,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
           <li class="show"><span class="pill">Show</span>Click Place Sprinklers. The engine runs and places the layout.</li>
 
-          <li class="reinforce"><span class="pill">Reinforce</span><em>(Pick up their workflow answer from later in the wait and reflect it back if you can.)</em> Based on what you've described, you'll see Tandm fits naturally into that approach. You can use Tandm just the way you like to work. <strong>Don't change the way you design.</strong></li>
-
           <li>While this runs, the engine is placing <strong>rows and columns</strong> of sprinklers across every room, equally spaced apart, equally away from walls.</li>
           <li>It's <strong>avoiding obstructions</strong> it found in those linked models, mech ducts, lighting, electrical, and trying to hit the tile positions we set, balancing all the compliance requirements at once.</li>
-
-          <li class="note"><span class="pill">Tip</span>Place Sprinklers takes another minute or so. Use the questions below now, you'll have richer answers because they've seen Tandm load and they're curious.</li>
         </ul>
 
         <div class="processing-questions">
           <div class="processing-questions-label">Processing Time Questions (use while Place Sprinklers runs)</div>
-          <p class="processing-questions-tip">Open with the invitation, then pick two or three of the targeted questions. They're all on-topic to what Tandm is doing right now: the engine is making compliance decisions in real time, the designer's habits and pain points are what'll matter most. Take notes, you'll use what they say in the close.</p>
+          <p class="processing-questions-tip">Open with the invitation, then pick from the three targeted questions. They're all on-topic to what Tandm is doing right now: the engine is making compliance decisions in real time. Take notes, you'll use what they say later.</p>
           <ul>
             <li><strong>Open invitation.</strong> "Has anyone got any questions while Tandm does this? It takes another minute or so."</li>
             <li>How do you and your team prefer to design? Floor by floor, room by room, or by zones?</li>
             <li>What's your typical workflow when starting a fresh fire design from a Revit model? Where do you usually begin?</li>
             <li>When you're placing sprinklers manually, what's the part that eats the most time? The spacing decisions, the obstruction checks, or the compliance verification?</li>
-            <li>How rigid are your firm's design conventions? If a layout came back compliant but not in your usual style, would you accept it or rework it?</li>
-            <li>How tightly are you working to minimum compliance versus building in buffers? Why?</li>
-            <li>What's your current obstruction workflow? Are you cross-checking against linked mech and electrical models manually?</li>
-            <li>When you check a manual layout, who's signing off? Senior designer? Or just self-review?</li>
-            <li>How often do you find yourself recalculating spacings because something changed? Daily, weekly, project end?</li>
           </ul>
         </div>
 
@@ -1521,43 +1497,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <li class="show"><span class="pill">Show</span>Click a room. Purple outline shows it's selected.</li>
           <li class="show"><span class="pill">Show</span>Click an element (light, air register). Right-click to cycle through overlapping elements.</li>
 
-          <li class="ask"><span class="pill">Ask</span>What's your reaction to that initial pass?</li>
-          <li class="ask"><span class="pill">Ask</span>Are there areas where you'd want it tighter or looser than what Tandm's given you?</li>
-
-          <li class="reinforce"><span class="pill">Reinforce</span>What just happened in three minutes is what would normally take your team <strong>several hours</strong> of placing, checking and recalculating.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>That's the <strong>80% automation</strong>. Now we look at the rooms Tandm has flagged, and that's where you finalise the design with the editing tools.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>Tandm only adds sprinklers when it can't hit all the compliance requirements with fewer. So most of the time, the layout you're seeing is close to what your designer would have placed manually, except you've just got it in three minutes instead of three days.</li>
-          <li class="reinforce show-contractor"><span class="pill">Reinforce</span>This is where <strong>tender response time</strong> shifts. You can have a coordinated layout to discuss with the architect on day one, not day five.</li>
-          <li class="reinforce show-consultancy"><span class="pill">Reinforce</span>This is where <strong>your designers get back to designing</strong> rather than plotting.</li>
-          <li class="reinforce show-solo"><span class="pill">Reinforce</span>For a solo operator, this is the difference between taking on the job or turning it down.</li>
-        </ul>
-
-        <div class="scroll-hint">Next: The editing tools, Grid Edit and Free Edit</div>
-      </article>
-
-        <div class="legend-row" style="margin: 14px 0;">
-          <span class="legend-chip"><span class="dot dot-blue"></span> Valid sprinkler, compliant position</span>
-          <span class="legend-chip"><span class="dot dot-light-green"></span> Coverage from that sprinkler</span>
-          <span class="legend-chip"><span class="dot dot-dark-green"></span> Coverage overlap between sprinklers</span>
-          <span class="legend-chip"><span class="dot dot-orange"></span> Invalid, needs attention</span>
-          <span class="legend-chip"><span class="dot dot-red"></span> Out of rule</span>
-          <span class="legend-chip"><span class="dot-orange-wall"></span> Orange wall, flag for designer</span>
-        </div>
-
-        <ul class="flow">
-          <li><strong>Blue</strong> means valid sprinkler in a compliant position. The bulk of your layout should be blue.</li>
-          <li>The <strong>green</strong> circles around each sprinkler show the coverage. Light green is the coverage area, dark green is where coverage overlaps between sprinklers. So you can visually see where you have double coverage versus single.</li>
-          <li><strong>Orange sprinklers</strong> need your attention. They're flagged because something is wrong: an obstruction, no valid tile position, sprinkler too close to a wall, something like that. Click the orange sprinkler and the left panel tells you why.</li>
-          <li><strong>Red</strong> means the sprinkler is out of rule. It's not compliant where it sits.</li>
-          <li><strong>Orange walls</strong> are flagged for designer review. There are two reasons that happens, we'll cover those in a few minutes.</li>
-
-          <li class="show"><span class="pill">Show</span>Click an orange sprinkler. Point at the left panel showing the reason it's flagged.</li>
-          <li class="show"><span class="pill">Show</span>Click a room. Purple outline shows it's selected.</li>
-          <li class="show"><span class="pill">Show</span>Click an element (light, air register). Right-click to cycle through overlapping elements.</li>
-
-          <li class="ask"><span class="pill">Ask</span>What's your reaction to that initial pass?</li>
-          <li class="ask"><span class="pill">Ask</span>Are there areas where you'd want it tighter or looser than what Tandm's given you?</li>
-
           <li class="reinforce"><span class="pill">Reinforce</span>What just happened in three minutes is what would normally take your team <strong>several hours</strong> of placing, checking and recalculating.</li>
           <li class="reinforce"><span class="pill">Reinforce</span>That's the <strong>80% automation</strong>. Now we look at the rooms Tandm has flagged, and that's where you finalise the design with the editing tools.</li>
           <li class="reinforce"><span class="pill">Reinforce</span>Tandm only adds sprinklers when it can't hit all the compliance requirements with fewer. So most of the time, the layout you're seeing is close to what your designer would have placed manually, except you've just got it in three minutes instead of three days.</li>
@@ -1579,15 +1518,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
         <ul class="flow">
           <li>So Tandm's done its first pass. Now we look at where it's flagged an orange sprinkler and start cleaning up.</li>
-          <li>The way I'm going to demonstrate this is by picking a room and showing you the two main editing modes, <strong>Grid Edit</strong> and <strong>Free Edit</strong>. These are inside the Advanced Design Tool, so the workspace is still open from the first layout pass.</li>
+          <li>I'll show you the three main editing modes by walking through three different rooms, <strong>Grid Edit</strong> first, then <strong>Free Edit</strong>, then <strong>Grid Edit</strong> again to show how it resets to the minimum compliant layout.</li>
 
-          <li class="show"><span class="pill">Show</span>Find a room with at least one orange sprinkler. Click the orange sprinkler. Point at the reason in the left panel: obstruction, no valid tile position, too close to a wall, etc.</li>
+          <li class="note"><span class="pill">Tip</span><strong>Byron's room-by-room dialogue being plugged in.</strong> Use the scaffolding below as a guide for now. Each room follows the same shape, identify the orange sprinkler, name what Tandm has flagged, demonstrate the tool. Detailed script coming once we capture Byron's exact wording for each room.</li>
+
+          <li><strong>Room 1: Grid Edit.</strong> Pick a room with at least one orange sprinkler.</li>
+
+          <li class="show"><span class="pill">Show</span>Click the orange sprinkler. Point at the reason in the left panel: obstruction, no valid tile position, too close to a wall, etc.</li>
 
           <li>So Tandm is telling me exactly why it's flagged that one. Now I'll click the room itself, you'll see it goes purple, meaning it's selected. Then I hit Grid Edit.</li>
 
-          <li class="show"><span class="pill">Show</span>Click the room. Then hit Grid Edit in the design tool.</li>
+          <li class="show"><span class="pill">Show</span>Click the room. Hit Grid Edit in the design tool.</li>
 
-          <li>What Grid Edit does is reset the room to the <strong>minimum number of sprinklers</strong>, centrally located. So whatever Tandm placed before, it's now showing you the simplest compliant layout.</li>
           <li>From there I can drag any sprinkler in the room. Watch what happens when I do.</li>
 
           <li class="show"><span class="pill">Show</span>Drag a sprinkler slowly across the room. Point out the live measurements appearing.</li>
@@ -1612,21 +1554,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <li class="show"><span class="pill">Show</span>Hit Align to Lights. Sprinklers turn purple as they snap to align with the lighting layout.</li>
 
           <li>That's manual, not automatic, because rooms often have lights running in two different orientations. You as the designer pick which orientation matters.</li>
-          <li>Now Free Edit, same room, different mode.</li>
+
+          <li><strong>Room 2: Free Edit.</strong> Move to a different room where you want to show the more flexible mode.</li>
 
           <li class="show"><span class="pill">Show</span>Click Free Edit. Demonstrate dragging freely, left-click to add a sprinkler, right-click to delete one.</li>
 
           <li>Free Edit gives you complete freedom. Drag anywhere, left-click adds a sprinkler, right-click deletes one. It still snaps to lights automatically, and compliance is still being checked live.</li>
           <li>Most designers use <strong>Grid Edit for clean rooms</strong> where they want minimum compliant layout, and <strong>Free Edit for tweaks</strong> or fixing one or two sprinklers.</li>
+
+          <li><strong>Room 3: Grid Edit again, showing the minimum.</strong> Pick a third room and demonstrate how Grid Edit resets to the minimum number of sprinklers, centrally located. So whatever Tandm placed before, Grid Edit shows you the simplest compliant layout. From there you can dial it up if you want more coverage.</li>
+
+          <li class="show"><span class="pill">Show</span>Click the third room. Hit Grid Edit. Layout drops to the minimum number of sprinklers. Walk through what's now on screen and contrast it with what Tandm originally placed.</li>
+
           <li>One more thing on shadowing. Tandm flags any shadow over <strong>1.4 square metres</strong> by default and may add a sprinkler to cover it. If you don't want any shadowing at all, just drag a sprinkler over the shadow area. The coverage updates live.</li>
-
-          <li class="ask"><span class="pill">Ask</span>Does your team have a strong preference for aligning sprinklers to lights, or do you tend to design coverage-first?</li>
-          <li class="ask"><span class="pill">Ask</span>How important is shadowing avoidance in your projects? Some firms are strict about it, others let it ride.</li>
-
-          <li class="reinforce"><span class="pill">Reinforce</span>This is where you go from <strong>days to hours</strong>. You're not pulling out a calculator or memorising spacings. Tandm is doing it for you, in real time.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>Your engineering judgement, but a completely different speed.</li>
-          <li class="reinforce show-contractor"><span class="pill">Reinforce</span>When your designers' time is the constraint on how many jobs you can take, this directly increases your capacity.</li>
-          <li class="reinforce show-consultancy"><span class="pill">Reinforce</span>For a consultancy, this is where senior designers stop doing junior work and start mentoring or focusing on coordination.</li>
         </ul>
 
         <div class="scroll-hint">Next: Splitting complex rooms into shapes Tandm handles well</div>
@@ -1672,13 +1612,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <li class="show"><span class="pill">Show</span>Pick a small rotated room. Split it on a diagonal. Hit Grid Edit. Show the grid orients to the longest wall.</li>
 
           <li>For genuinely odd-shaped rooms where you can't get a clean rectangular split, my approach is: create the biggest rectangle you can with the splitting tool, then use Free Edit to fill in the awkward bits manually.</li>
-
-          <li class="ask"><span class="pill">Ask</span>What sort of room shapes give your team the most grief currently? Long corridors, L-shapes, or something else?</li>
-          <li class="ask"><span class="pill">Ask</span>How often are you dealing with corridors with rooms branching off them?</li>
-
-          <li class="reinforce"><span class="pill">Reinforce</span>This is the tool you'll use most. It's how you turn Tandm's first pass into exactly what you'd design yourself.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>The compliance engine is still running across the virtual splits. Tandm won't let you breach the rules just because you've drawn a line on the screen.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>Once you've got the rhythm of split-then-tweak, what used to be an hour-long room becomes a five-minute room.</li>
         </ul>
 
         <div class="scroll-hint">Next: Decode the orange walls Tandm shows you</div>
@@ -1710,13 +1643,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <li><strong>Wall Trace</strong> lets you bypass the room definition and work straight from the actual wall geometry. Tandm reads the walls directly and rebuilds the layout based on them.</li>
 
           <li class="show"><span class="pill">Show</span>Find an apartment area with orange walls but no ceiling step. Click Wall Trace. Watch the walls and layout regenerate together.</li>
-
-          <li class="ask"><span class="pill">Ask</span>How often do you come across multiple ceiling heights in a single room, or bulkheads to design around?</li>
-          <li class="ask"><span class="pill">Ask</span>Are you doing much apartment or residential work where architects play games with room bounding?</li>
-
-          <li class="reinforce"><span class="pill">Reinforce</span>Each one of these scenarios used to be a half-hour problem. Now it's two clicks.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>Notice the pattern: Tandm flags what needs your judgement, and gives you the tool to act on it fast.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>This is the difference between automation that hides problems and automation that surfaces them. <strong>Tandm always surfaces.</strong></li>
         </ul>
 
         <div class="scroll-hint">Next: Mix hazard classes across the same floor</div>
@@ -1737,12 +1663,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
           <li class="show"><span class="pill">Show</span>Find a room that should be ordinary hazard (storage, plant, kitchen). Click the room, change hazard class from the dropdown, hit Place Sprinklers. Show the redesign with different spacing.</li>
           <li class="show"><span class="pill">Show</span>Select 3 rooms together. Repeat the change. Show batch behaviour.</li>
-
-          <li class="ask"><span class="pill">Ask</span>How often do you have mixed hazard classes on a single floor?</li>
-          <li class="ask"><span class="pill">Ask</span>Do you typically design per-room or per-zone?</li>
-
-          <li class="reinforce"><span class="pill">Reinforce</span>Mixed hazard classes are usually a manual nightmare. Remembering spacings, switching mid-floor, double-checking each room.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>Here, it's a dropdown and a re-run. Tandm handles all the spacing logic for you.</li>
         </ul>
 
         <div class="scroll-hint">Next: Layer detectors and speakers on top</div>
@@ -1757,6 +1677,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         <p class="phase-summary">Layer detection on top of sprinklers in the same design space. Same tools, same colour code, same compliance engine.</p>
 
         <ul class="flow">
+          <li class="note"><span class="pill">Tip</span><strong>Byron's detector and speaker script being plugged in.</strong> Use the scaffolding below as a guide for now. Detailed script for the Place Detectors and Place Speakers walkthroughs coming once we capture Byron's exact wording.</li>
+
           <li class="ask"><span class="pill">Ask</span><strong>My calibration question first:</strong> "Do you also design dry fire? Smoke detectors, heat detectors, speakers?"</li>
           <li class="note"><span class="pill">Tip</span>If <strong>no</strong>, keep this section brief. Mention Dry Fire exists and Tandm is building towards a fully integrated wet + dry workflow, then move on. If <strong>yes</strong>, go deeper.</li>
 
@@ -1782,7 +1704,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         <ul class="flow">
           <li>OK, detection layout's done. Same colour code as the sprinklers, so you can read it instantly.</li>
 
-          <li class="show"><span class="pill">Show</span>Point out a clash with an air register being avoided automatically. Move a couple of detectors around to demonstrate the editing tools work the same way.</li>
           <li class="show"><span class="pill">Show</span><strong>Zoom-out moment:</strong> once placed, zoom out and say: "There's obviously a lot of green, but there are also areas that still need attention. That just happens as you start coordinating more services."</li>
 
           <li>Now to speakers. One thing to flag on speakers first: there is <strong>no standard spacing</strong> for them. What you'll see is rules of thumb that designers generally apply. It's up to your team to set what you use per project.</li>
@@ -1797,17 +1718,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <li class="show"><span class="pill">Show</span>Toggle visibility filters to show or hide service types. Useful to clean the view when stacking gets busy.</li>
 
           <li class="reinforce show-contractor"><span class="pill">Reinforce</span><strong>Drop the Auscoast testimonial here:</strong> "Tandm has changed the way we do business. We can get tenders out the door quicker, issue compliant designs in record time, save hours on redesign and our profitability has increased." Haydn Mackie, Director, Auscoast Fire Services.</li>
-
-          <li class="ask"><span class="pill">Ask</span>How much dry fire work do you take on currently? Is it a regular part of your portfolio, or opportunistic?</li>
-          <li class="ask"><span class="pill">Ask</span>Do you tend to coordinate sprinklers and detection in one model, or treat them as separate workflows?</li>
-          <li class="ask show-contractor"><span class="pill">Ask</span>Are you doing many EWIS speakers as part of your D&amp;C scope?</li>
-
-          <li class="reinforce"><span class="pill">Reinforce</span><strong>One design space, all services, coordinated.</strong> Same tools, same compliance engine, same colour code as sprinklers.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>The detection workflow you're seeing now is what shipped in the MVP, built from feedback from designers like you.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>The 40% Dry Fire discount is intentional. We know the engine has more coordination to do as services stack, and that's the deal while we close that gap.</li>
-          <li class="reinforce show-contractor"><span class="pill">Reinforce</span>For contractors tendering on combined wet and dry, this is the workflow that makes you faster than firms still doing detection manually.</li>
-          <li class="reinforce show-consultancy"><span class="pill">Reinforce</span>For consultancies that occasionally do detection, this means you can take on dry-fire scope without it dragging out the project.</li>
-          <li class="reinforce show-solo"><span class="pill">Reinforce</span>Even if dry fire is a side hustle for you, this is enough automation that it stops being a money-loser.</li>
         </ul>
 
         <div class="scroll-hint">Next: Push everything to the Revit model</div>
@@ -1852,20 +1762,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         </div>
 
         <ul class="flow">
-          <li>OK, push is done. Let me switch over to the Revit view so you can see it landed.</li>
-
-          <li class="show"><span class="pill">Show</span>Switch to the Revit model view. Show the sprinklers, detectors and speakers now placed.</li>
-          <li class="show"><span class="pill">Show</span>Click on a sprinkler. Show it's a normal Revit family with normal Revit properties.</li>
-          <li class="show"><span class="pill">Show</span>Open a schedule briefly to show the families flow through to schedules and takeoffs as normal.</li>
-
-          <li><strong>You own the design.</strong> No watermarks, no IP claim from Tandm, no lock-in. If Tandm disappeared tomorrow, your designs keep working in Revit.</li>
-
-          <li class="ask"><span class="pill">Ask</span>How do you currently handle takeoffs and schedules? Whatever your process is, Tandm's output flows into it.</li>
-          <li class="ask show-contractor"><span class="pill">Ask</span>Do you have a typical workflow for handing off from designer to drafter? This export step is where that happens cleanly.</li>
-
-          <li class="reinforce"><span class="pill">Reinforce</span>This is one of the questions we get most: <strong>who owns the design?</strong> The answer is always, you do, 100%.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>Tandm's job is to compress the boring parts. Once your design is in Revit, it's yours.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>That also means Tandm fits cleanly inside whatever your existing workflows are. Hyena calcs, VTi tools, drafter handoff, takeoffs, the lot.</li>
+          <li>OK, push is done. The sprinklers, detectors and speakers are now in your Revit model as native families. Your annotation, your schedules, exactly as if you placed them manually.</li>
         </ul>
 
         <div class="scroll-hint">Next: Redesigns and the margin protection story</div>
@@ -1954,91 +1851,32 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <li class="reinforce show-consultancy"><span class="pill">Reinforce</span>For consultancies, this is the difference between absorbing change orders silently and being able to push back with confidence.</li>
         </ul>
 
-        <div class="scroll-hint">Next: The limitations conversation, be honest, be confident</div>
+        <div class="scroll-hint">Next: The close, bring it all together</div>
       </article>
 
+
       <!-- ============================================== -->
-      <!-- PHASE 13, Limitations                          -->
+      <!-- PHASE 13, Close (formerly Phase 14)            -->
       <!-- ============================================== -->
       <article class="phase" data-phase="13">
         <div class="phase-eyebrow"><span class="step">13</span> Wrap <span class="mode-badge">~3 min</span></div>
-        <h1 class="phase-title">Limitations</h1>
-        <p class="phase-summary">The honesty stack. Name them. Explain why. Roadmap. Dev team. Portfolio reframe.</p>
+        <h1 class="phase-title">Close</h1>
+        <p class="phase-summary">Bring it all together. Generate, refine, adjust, repeat. Position Tandm as a coordination tool, not a replacement for the designer.</p>
 
         <ul class="flow">
-          <li>We're upfront about where Tandm is right now. There are three main things to flag, and they all sit in the same active workstream.</li>
+          <li>So this brings together the full workflow, from layout generation through to refinement and redesign. The key takeaway isn't just automation, it's how quickly you can iterate as the design evolves.</li>
 
-          <li><strong>1. Native Revit only.</strong> IFCs and Archicad exports don't map cleanly into Revit rooms. We've got eight to nine developers working full time, and IFC and 2D CAD workflows are the next major workstream after Dry Fire MVP.</li>
-          <li><strong>2. Sloping ceilings.</strong> Depends on how they're modelled, so it's hit and miss. We don't advertise it for that reason. Same roadmap workstream as the geometry rewrite.</li>
-          <li><strong>3. Interconnected levels.</strong> Revit rooms are associated to one level, so as soon as a space spills over, Tandm can't see it. Car parks are the classic example, multiple levels in one big space. Same roadmap.</li>
-          <li>A couple of other things worth mentioning if they ask:</li>
-          <li><strong>Concealed space sprinklers</strong> aren't native today. There are workarounds, but it's also pipework-dependent, so it's queued behind the pipework roadmap.</li>
-          <li><strong>We don't do pipework yet.</strong> That's the next major build after IFC and 2D, likely 12-plus months out. Right now Tandm gives you more time for pipework, rather than doing it for you.</li>
+          <li><strong>That's Tandm end to end.</strong> We generate the initial layout across the model, then refine the problem areas using Grid Edit, Free Edit and Splitting, and then handle redesign as it comes in.</li>
+          <li>That becomes the workflow. <strong>Generate, refine, adjust, and repeat</strong> as the project develops.</li>
 
-          <li class="note"><span class="pill">Tip</span><strong>If they ask about a specific limitation in detail,</strong> offer to send the project file to Byron after the call. He'll do a quick assessment of Tandm fit before they commit.</li>
-          <li class="note"><span class="pill">Tip</span>If they ask about IFC specifically, mention the active geometry-rewrite workstream and the dev team size.</li>
+          <li>Tandm isn't replacing the designer, it's removing the repetitive parts of the workflow so you can focus on the decisions that actually matter.</li>
+          <li>And at the same time, it's giving you faster feedback as you design. So instead of working blindly and checking later, you're seeing compliance and coordination in real time.</li>
 
-          <li class="reinforce"><span class="pill">Reinforce</span><strong>The portfolio reframe (this is the close on limitations):</strong> Where Tandm fits in your portfolio is the projects with native Revit models and standard floor plates. That's where it'll save you days.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>Projects with sloping ceilings, IFCs, or interconnected levels stay manual today. We're actively building toward them.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>Tandm doesn't have to do <strong>every</strong> project to be worth it. It just has to land brilliantly on the ones where it fits.</li>
+          <li>As I said before, it works best in structured environments like hospitals, residential buildings, and commercial floor plates, where there's a lot of repetitive and consistent geometry.</li>
+          <li>There will be edge cases, complex rooms, unusual geometry, or modelling issues where you need to step in as a designer. But across the majority of the project, it's taking care of the heavy lifting for you.</li>
 
-          <li class="note"><span class="pill">Tip</span><strong>The honesty stack pattern</strong> works for every limitation. Use this structure each time:
-            <ul>
-              <li>Name the limitation plainly.</li>
-              <li>Explain the technical why.</li>
-              <li>State the roadmap commitment.</li>
-              <li>Reference the active dev team (8-9 developers).</li>
-              <li>Reframe to where it does fit.</li>
-            </ul>
-          </li>
-        </ul>
-
-        <div class="scroll-hint">Next: ROI recap, offer, next steps</div>
-      </article>
-
-      <!-- ============================================== -->
-      <!-- PHASE 14, ROI & Close                          -->
-      <!-- ============================================== -->
-      <article class="phase" data-phase="14">
-        <div class="phase-eyebrow"><span class="step">14</span> Wrap <span class="mode-badge">~5 min</span></div>
-        <h1 class="phase-title">ROI &amp; Close</h1>
-        <p class="phase-summary">Refer back to the alignment session ROI, drop the right testimonial, present the offer, lock in next steps.</p>
-
-        <ul class="flow">
-          <li>Quick recap on the ROI we ran together in the alignment session.</li>
-          <li><strong>The maths:</strong> <span class="placeholder" data-fill="roi-maths">[X levels × Y sqm × Z hours/level × $rate × N projects/year]</span></li>
-          <li><strong>The outcome:</strong> <span class="placeholder" data-fill="roi-days">[days saved]</span> back, <span class="placeholder" data-fill="roi-dollars">[$ saved]</span> on a sub-$5K investment.</li>
-          <li>And that's only one segment of your portfolio. Tandm isn't going to do every project, but where it lands in the sweet spot, <strong>it kicks like a mule</strong>.</li>
-          <li>I'll send you the link to the ROI calculator after this so you can play with your own numbers.</li>
-
-          <li class="note"><span class="pill">Tip</span><strong>Use the ROI button at the top</strong> to open the Estimator with the prospect's numbers from the alignment session already loaded.</li>
-
-          <li class="reinforce show-contractor"><span class="pill">Reinforce</span><strong>Auscoast testimonial:</strong> "Tandm has changed the way we do business. We can get tenders out the door quicker, issue compliant designs in record time, save hours on redesign and our profitability has increased." Haydn Mackie, Director, Auscoast Fire Services.</li>
-          <li class="reinforce show-contractor"><span class="pill">Reinforce</span><strong>Troy at Plexus (WA):</strong> 12 months in, just renewed. 2,000 sprinklers in a single day. 4 to 5 days saved per project. Uses Tandm as a competitive advantage in WA.</li>
-          <li class="reinforce show-consultancy"><span class="pill">Reinforce</span><strong>Tom Robson (Brisbane):</strong> 100 hours saved over 6 months. 92% of manual work eliminated. Figured out how to use Tandm on 2D CAD projects too.</li>
-          <li class="reinforce show-consultancy"><span class="pill">Reinforce</span><strong>International firm in alignment session:</strong> $140K annual labour savings and 73 design days returned, based on one office only.</li>
-          <li class="reinforce show-solo"><span class="pill">Reinforce</span>Even for solo operators, the Dry Fire side is interesting. It can let you take on detection scope at proper rates rather than turning it down because it's not worth your time.</li>
-
-          <li>OK, on to the offer itself.</li>
-          <li><strong>Wet seat alone:</strong> A$4,999 per year. Includes two live onboarding sessions where Byron works on your projects with your team, not a video, an actual project run-through.</li>
-          <li><strong>Dry Fire MVP:</strong> A$1,799 per year, currently <strong>40% off</strong> because it's MVP. You're getting in on the ground floor.</li>
-          <li><strong>Bundle (wet + dry):</strong> <span class="placeholder">[A$5,499, confirm]</span>. Most action is here right now.</li>
-          <li><strong>Hyena loyalty discount:</strong> existing Hyena users get an extra 10% off any of these.</li>
-          <li><strong>Expansion credits:</strong> if you want more seats later (within 60 days), 40% off additional seats. Up to 4 bonus credits per seat.</li>
-          <li><strong>Guided onboarding guarantee:</strong> If after the two onboarding sessions it's not delivering for you, you can pull out. Zero risk. No one's needed to use it yet, but it's there.</li>
-
-          <li class="reinforce"><span class="pill">Reinforce</span>Since January 2026 we've had more sales than the previous 18 months combined. Tandm has crossed a threshold where firms are jumping on board.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>We've got customers across consultancies and contractors, multi-disciplinary firms, solo operators, and recently bigger tier-one names. Also expanding into Europe and the US later this year.</li>
-          <li class="reinforce"><span class="pill">Reinforce</span>The guided onboarding guarantee exists for one reason: <strong>we want to be in this with you</strong>. We don't want you carrying software you're not using. So if it's not landing, we'll back out gracefully.</li>
-
-          <li>To wrap up, here's what happens next.</li>
-          <li>I'll send you a summary today: questions and answers from this session, the ROI calculator link, the offer details, and the recording link.</li>
-          <li>Have a read through with your team and I'll check in next <span class="placeholder" data-fill="followup-day">[day]</span>.</li>
-
-          <li class="ask"><span class="pill">Ask</span>Who's the best person for me to follow up with?</li>
-          <li class="ask"><span class="pill">Ask</span>If you've got a current project model you'd like Byron to take a quick look at for Tandm fit, send it through and we'll give you an honest assessment before you commit.</li>
-
-          <li class="note"><span class="pill">Tip</span><strong>If the right people weren't on the call:</strong> offer a second session focused on Dry Fire for the wider team, or share the recording.</li>
+          <li>And really, the biggest gain for you isn't just the first layout. It's <strong>how quickly you can respond to change</strong>, how quickly you can iterate, and how easily you can redesign as coordination happens.</li>
+          <li>That's where most projects lose time today, and that's what Tandm is trying to solve.</li>
         </ul>
 
         <div class="scroll-hint">End of demo. Send summary email within 24 hours.</div>
@@ -2302,19 +2140,10 @@ const sidebar = {
     { q: "Can I bring an existing design back into Tandm to check compliance?", a: "Not yet. Currently the workflow is rerun rather than retrofit. Existing-design compliance checking is on the roadmap." }
   ],
   13: [
-    { q: "When will IFC support land?", a: "Next major workstream after Dry Fire MVP. Bringing geometry in differently is the strategic focus, and that will also unlock sloping ceilings and interconnected levels." },
-    { q: "What about pipework automation?", a: "Not in Tandm today. Roadmap, alongside closer Hyena integration. Right now Tandm gives you more time for pipework, rather than doing it for you. Pipework alone is at least a year of dev work to do well." },
-    { q: "What about concealed space?", a: "Not native today, concealed space layouts are pipework-dependent, so it's queued behind pipework on the roadmap. Some advanced users have found workarounds." },
-    { q: "What about hydrant systems / underground?", a: "Not Tandm's sweet spot, Tandm is focused on below-ceiling sprinkler and detection layouts. Hydrants and underground remain manual." },
-    { q: "Does AI play a role?", a: "Tandm isn't AI-driven, it's built from standards for compliance. AI can give good results but is unpredictable. From a fire design perspective, you're either compliant or you're not, Tandm's engine is deterministic." }
-  ],
-  14: [
-    { q: "Is the offer fixed or negotiable?", a: "Standard offer. Hyena users get an extra 10%. Volume on additional seats earns expansion credits (40% off, up to 4 bonus credits, 60 days). Guided onboarding guarantee de-risks the commitment." },
-    { q: "What if my team doesn't end up using it?", a: "That's exactly what the onboarding guarantee covers. Two live sessions on your actual projects; if it's not landing, you can exit. No one's needed to use it yet." },
-    { q: "How are seats licensed?", a: "Per user, tied to email address. Reassignable to other users later. Similar to Revit's licensing model." },
-    { q: "Can I trial before committing?", a: "The guided onboarding guarantee replaces the old trial model. We work with you live on your projects for two sessions. If it doesn't deliver, you can pull out. We moved away from trials because they tended to drift and never finish." },
-    { q: "Can Byron review one of my project files before I commit?", a: "Yes, happy to. Send a stripped Revit file and Byron will give you an honest read on Tandm fit." },
-    { q: "What's the implementation timeline?", a: "Once you commit, onboarding sessions get scheduled to suit your team. Most people are running Tandm on a live project within two weeks." }
+    { q: "What happens after this demo?", a: "I'll send you a summary today with the recording link and ROI calculator. Have a read through with your team, I'll check in soon to discuss next steps." },
+    { q: "Can Byron review one of my project files before I commit?", a: "Yes, happy to arrange that. Send a stripped Revit file and Byron will give you an honest read on Tandm fit before any commitment." },
+    { q: "What's the typical implementation timeline?", a: "Once you commit, onboarding sessions get scheduled to suit your team. Most people are running Tandm on a live project within two weeks." },
+    { q: "What about edge cases like sloping ceilings, IFC, interconnected levels?", a: "Those are honest limitations today. Native Revit models with standard floor plates are Tandm's sweet spot. For everything else, you'd still work the way you do now. The dev team is actively building toward broader geometry support, IFC is next on the roadmap after Dry Fire MVP." }
   ]
 };
 
