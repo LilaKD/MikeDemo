@@ -1374,6 +1374,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <li><strong>Tile positions.</strong> This is where you tell Tandm which positions on a tile are valid for sprinkler placement.</li>
           <li>By default we ship with the standard tile positions activated, the centre, mid-points and corners. Most of the time I'd leave them all on, that gives Tandm the most flexibility when it's placing.</li>
           <li>If for some reason you can't physically place sprinklers in the corners of a square tile, maybe the corners are reserved for lights or air registers in your firm's standard, you can deactivate those positions here. Tandm will respect that and only place where you've told it it's allowed.</li>
+          <li>Leaving a position active doesn't force placement there. If Tandm finds a light or air register in that spot, it avoids it. You only deactivate positions when you never want a device there.</li>
           <li><strong>Custom tile sizes.</strong> Same section. If the architect on a specific project is using a non-standard tile size, say a long rectangular tile or a custom dimension, you add it here so Tandm can match the layout to it.</li>
 
           <li><strong>General Settings (Soffit Offset for Exposed Areas).</strong> This sets how far off the soffit your sprinklers sit in exposed ceiling areas. We've defaulted to the standard maximum, 300mm for combustible and 450mm for non-combustible. You can adjust if you want to lift them to align with your range pipework.</li>
@@ -1383,8 +1384,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <li class="ask"><span class="pill">Ask</span>Do you have your own sprinkler families you'd want to load in, or are you happy to start with what we ship?</li>
 
           <li><strong>Design Standards (Custom Hazard Classifications).</strong> If you need different spacings for extended coverage, residential, flush, or semi-recessed heads, you create a new class here based on an existing one and edit any field. You can map different families to different classes.</li>
+          <li>And it's not a simple box grid underneath. Tandm dynamically calculates the spacings from the maximum coverage area for each class, so what you get is genuinely compliant, not an approximation.</li>
 
           <li>I'll create a custom hazard class as a demo. "Custom light" based on light hazard, change one value, hit Apply. Show it appears in the families list ready to map.</li>
+
+          <li>Now the dry fire side. Same setup, separate tabs for each service.</li>
+          <li><strong>Smoke detectors.</strong> Standard spacings of 10, 15 and 20 metres baked in to the Australian standards, with air register clearances built in. Add your own on top.</li>
+          <li><strong>Heat detectors.</strong> Same again, 7 metres set as the Australian default, custom spacings if you need them.</li>
+          <li><strong>Speakers.</strong> 8, 10 and 12 metres, what's typically used here. Customise for fine-engineered solutions.</li>
+          <li>All unhosted families, same as sprinklers. Set up once, then just select as you go.</li>
 
           <li class="ask show-contractor"><span class="pill">Ask</span>Do you tend to use flush heads in certain areas? We can set up a flush classification just for those rooms.</li>
 
@@ -1415,6 +1423,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <li>I'll select the architectural links, choose soffit of level 1, point out the 4.5m distance check. Hit OK.</li>
 
           <li>This is the first model-quality gauge. If rooms are missing or blank, the architect's model has gaps in those areas.</li>
+
+          <li>Working from a CAD file instead of native Revit? There's a workaround: Tandm picks up room separation lines as well as Revit rooms, so you can define the spaces that way and still run Tandm.</li>
 
           <li class="reinforce"><span class="pill">Reinforce</span><strong>Tandm aims for 80% automation across 80% of rooms.</strong> Perfect models don't exist, every architect's model has imperfections. The 20% Tandm can't process, you finish manually, the same way you would today, just on a much smaller patch.</li>
         </ul>
@@ -1522,7 +1532,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
           <li>I'll drag a sprinkler too close to another one. They both turn orange.</li>
           <li>I'll drag a sprinkler too far from a wall. The wall-distance line turns red.</li>
-          <li>I'll click one of the small black dots. Those are valid tile positions Tandm has found.</li>
+          <li>I'll click one of the small black dots. Those are valid tile positions Tandm has found. Black means valid; grey means the position's there but too close to an edge to use.</li>
 
           <li>So compliance is built in at every step:
             <ul>
@@ -1549,7 +1559,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
           <li>I'll click the third room. Hit Grid Edit. Layout drops to the minimum number of sprinklers. Walk through what's now on screen and contrast it with what Tandm originally placed.</li>
 
+          <li>Quick insight into the engine: a room this size would've only needed one sprinkler if the centre was free. It wasn't, so the engine added a row. It takes you most of the way, then hands over to you, that's the trade-off that keeps it fast.</li>
+
           <li>One more thing on shadowing. Tandm flags any shadow over <strong>1.4 square metres</strong> by default and may add a sprinkler to cover it. If you don't want any shadowing at all, just drag a sprinkler over the shadow area. The coverage updates live.</li>
+
+          <li>A floor like this, fully tidied, is under an hour of work. That's the same job that takes two to five days by hand. You make every call, Tandm removes the grind.</li>
         </ul>
 
         <div class="scroll-hint">Next: Splitting complex rooms into shapes Tandm handles well</div>
@@ -1671,11 +1685,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         <p class="phase-summary">Mix hazard classes across the same floor. Change a room or a group of rooms, Tandm redesigns just those.</p>
 
         <ul class="flow">
-          <li>Every room can have its <strong>own hazard class</strong>. Light hazard in offices, ordinary in storage, residential in apartments, all on the same floor.</li>
-          <li>You change a single room, or select a group of rooms, then change the hazard class from the dropdown on the left. Tandm clears those rooms and redesigns them to the new class.</li>
-          <li>You can also batch-change rooms using the filter button. Select all rooms of a certain type and apply at once.</li>
+          <li>This links back to the custom classifications we set up at the start. Every room can have its <strong>own hazard class</strong>, light in offices, ordinary in storage, residential in apartments, all on one floor.</li>
+          <li>The flow is simple: <strong>click any room, change its hazard class from the dropdown.</strong> Pick ordinary for this storage room and Tandm redesigns it to the new spacings on the spot.</li>
+          <li>This is where those custom classes pay off. Set up a flush-head class earlier? Select it here and Tandm places that family in that room.</li>
+          <li>Mix and match across the whole model, no problem. You redesign per area as you go.</li>
 
-          <li>I'll find a room that should be ordinary hazard (storage, plant, kitchen). Click the room, change hazard class from the dropdown, hit Place Sprinklers. Show the redesign with different spacing.</li>
+          <li>I'll find a room that should be ordinary hazard, click it, change the class, and show the redesign with the different spacing.</li>
         </ul>
 
         <div class="scroll-hint">Next: Layer detectors and speakers on top</div>
@@ -1694,9 +1709,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           <li class="note"><span class="pill">Tip</span>If <strong>no</strong>, keep this section brief. Mention Dry Fire exists and Tandm is building towards a fully integrated wet + dry workflow, then move on. If <strong>yes</strong>, go deeper.</li>
 
           <li>Once your sprinkler design is done, you switch to the Detectors tab inside the design workspace. Same workflow, just a different service. <strong>All the compliance is built in.</strong></li>
-          <li>Tandm checks the <strong>900mm minimum clearance</strong> from air registers automatically. Same colour code, same editing tools as I just showed you for sprinklers.</li>
+          <li>Quick context: dry fire is <strong>fresh out</strong>, and it's already saving real time on detection and speaker layouts. Wet fire's had the most road time so it's the most polished; dry fire is the newest addition and the logic is all there, it's the same compliance-driven design space. You're getting in on the ground floor, which is exactly why it's <strong>40% off</strong> right now.</li>
+          <li>Detectors bring their own compliance rules into the same engine. The main one is the <strong>900mm minimum clearance from air registers</strong>, checked automatically as it places, same colour code, same editing tools as sprinklers.</li>
 
           <li>I'll switch to the Detectors tab. Hit Place Detectors.</li>
+
+          <li>You can change spacings live too. Want detectors at 15 metres instead? Change it, confirm, and Tandm replaces them at the new spacing. No trip back to settings.</li>
 
           <li class="note"><span class="pill">Tip</span>This is a processing wait of around 30 to 60 seconds. Use the Processing Time Questions box below to keep them engaged.</li>
         </ul>
@@ -1723,6 +1741,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
           <li><em>As the speakers appear, say this out loud:</em></li>
           <li>"You'll see more clashes here. That's where the engine is in terms of coordinating three different services at once. It's reflected in the <strong>40% Dry Fire discount</strong> we're offering with this release. As the product gets better and requires less manual rework, that's where we'll start closing the gap."</li>
+
+          <li>And remember, all of this is happening <strong>outside Revit</strong>, in Tandm's design space. Nothing's touched your model yet. You coordinate everything in one workflow, then push it all to Revit when you're happy.</li>
 
           <li>I'll toggle visibility filters to show or hide service types. Useful to clean the view when stacking gets busy.</li>
 
